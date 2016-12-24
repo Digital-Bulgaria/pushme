@@ -1,0 +1,190 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+	
+    <title>PushMe - collect and explore HTTP requests</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+
+	<object 
+		th:include="/fragments/styles :: styles" 
+		th:remove="tag">
+	</object>
+		
+	<object 
+		th:include="/fragments/scripts :: scripts" 
+		th:remove="tag">
+	</object>
+		
+</head>
+
+<body>
+    <div class="container-fluid">
+    
+    	<!-- Title row -->
+    	<div class="row bottom-padding">
+    		<div class="col-md-8 col-md-offset-2">
+    			<h4 class="text-center">
+    				PushMe is a developer tool that lets you capture and inspect HTTP requests
+    				in a human friendly manner. PushMe is especially useful in projects
+    				where push notifications should be tested from behind a firewall.
+    			</h4>
+    		</div>
+    	</div>
+    	
+    	<!-- Learn more -->
+		<div class="row bottom-padding">
+    		<div class="col-md-8 col-md-offset-2">
+    		
+    			<div class="text-center">     
+        				<button 
+		    				id="btn_learn_more" 
+    						class="btn btn-lg btn-success">
+    						<i class="fa fa-graduation-cap fa-lg"></i> 
+    						<span id="btn_learn_more_visible"> Learn more</span>
+    						<span id="btn_learn_less_visible" class="initiallyHidden"> Less</span>
+    					</button>
+ 				</div>
+    			
+    		</div>
+    	</div>
+    	<!-- EO: Learn more -->    	
+    	
+    	<!-- Steps -->
+    	<div id="learn_more_content" class="initiallyHidden row bottom-padding">
+    		<div class="col-md-offset-2 col-md-2">
+    			<div class="thumbnail">
+      				<div class="caption">
+        				<h4 class="text-center">1. Create</h4>
+        				<div class="text-center"><i class="fa fa-plus fa-2x"></i></div>
+        				<p>
+        					PushMe containers are
+        					the places where your requests are collected.
+        					A container is associated with its own URL 
+        					so that the requests of the different PushMe users
+        					do not interfere with each other.
+        					To use PushMe you have to create a
+        					container.
+        				</p>
+      				</div>
+    			</div>
+    		</div>
+    		
+    		<div class="col-md-2">
+    			<div class="thumbnail">
+      				<div class="caption">
+        				<h4 class="text-center">2. Configure</h4>
+        				<div class="text-center"><i class="fa fa-cogs fa-2x"></i></div>
+        				<p>
+        					New containers are preconfigured by default so this step is optional.
+        					They collect all requests and return an empty page with 
+        					status 200 when hit. If this is not enough the answer
+        					and status code may be configured. 
+        				</p>
+      				</div>
+    			</div>
+    		</div>
+    		
+    		<div class="col-md-2">
+    			<div class="thumbnail">
+      				<div class="caption">
+        				<h4 class="text-center">3. Collect</h4>
+        				<div class="text-center"><i class="fa fa-cloud-upload fa-2x"></i></div>
+        				<p>
+        					Collect certain number of requests that will fill your container.
+        					This may be collected when sending 
+        					HTTP requests to the URL associated with the PushMe
+        					container. Each container is assigned an URL 
+        					when created.
+        				</p>
+      				</div>
+    			</div>
+    		</div>
+    		
+    		<div class="col-md-2">
+    			<div class="thumbnail">
+      				<div class="caption">
+        				<h4 class="text-center">4. Inspect</h4>
+        				<div class="text-center"><i class="fa fa-eye fa-2x"></i></div>
+        				<p>
+        					Inspect the headers and the payloads of the
+        					collected requests. Download the request information
+        					locally. Replay the request later by using additional tooling. 
+        				</p>
+      				</div>
+    			</div>
+    		</div>
+    	</div>
+    	
+    	<!-- EO: Steps -->
+    	
+    	<!-- Create a container -->
+		<div class="row bottom-padding">
+    		<div class="col-md-8 col-md-offset-2">
+    		
+    			<div class="text-center">     
+        				<button 
+		    				id="btn_create_container" 
+    						class="btn btn-lg btn-success">
+    						<span id="btn_create_container_new"><i class="fa fa-plus fa-lg"></i> New container</span>
+    						<span id="btn_create_container_working" class="initiallyHidden"><i class="fa fa-cog fa-spin fa-lg fa-fw"></i> Working...</span>
+    						<span id="btn_create_container_done" class="initiallyHidden"><i class="fa fa-check fa-lg"></i> Done</span>
+    					</button>
+ 				</div>
+    			
+    		</div>
+    	</div>
+    	<!-- EO: Create a container -->
+    	
+    	<div id="success_message" class="initiallyHidden">
+    	<!-- Success -->
+		<div class="row bottom-padding">
+    		<div class="col-md-6 col-md-offset-3">
+    			<div class="text-center">     
+        			<div class="alert alert-success" role="alert">
+        				<strong>Congrats!</strong> You have successfully created a new PushMe container! 
+        				To configure, access and inspect it use the links and URL-s given below.
+        			</div>
+    			</div>
+    		</div>
+    	</div>
+    	<!-- EO: Success -->
+    	
+    	<a id="url_container" class="initiallyHidden" th:href="@{/containers/container_id}"></a>
+    	<a id="url_container_setup" class="initiallyHidden" th:href="@{/containers/setup(id=container_id)}"></a>
+    	<a id="url_container_inspect" class="initiallyHidden" th:href="@{/containers/isnpect(id=container_id)}"></a>
+    	
+    	<!-- Links -->
+   		<div class="row bottom-padding">
+    		<div class="col-md-6 col-md-offset-3">
+    			<div class="form-group">
+    				<label for="url_container_input">Container URL (the endpoint that listens for requests):</label>
+    				<input type="text" class="form-control" id="url_container_input"/>
+ 				 </div>
+    		</div>
+    	</div>
+    	
+    	<div class="row bottom-padding">
+    		<div class="col-md-6 col-md-offset-3">
+    			<div class="form-group">
+    				<label for="url_container_setup_input"><a href="#">Inspect URL</a> (here you may inspect the collected requests):</label>
+    				<input type="text" class="form-control" id="url_container_setup_input"/>
+ 				 </div>
+    		</div>
+    	</div>
+    	
+    	<div class="row bottom-padding">
+    		<div class="col-md-6 col-md-offset-3">
+    			<div class="form-group">
+    				<label for="url_container_inspect_input"><a href="#">Setup URL</a> (here you may further setup your container):</label>
+    				<input type="text" class="form-control" id="url_container_inspect_input"/>
+ 				 </div>
+    		</div>
+    	</div>
+    	</div>
+    	
+    	  
+    </div>
+    
+    
+</body>
+</html>

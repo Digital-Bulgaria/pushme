@@ -1,0 +1,9 @@
+/*Increases the space between rows*/
+
+.row.bottom-padding {
+	margin-bottom: 20px;
+}
+
+.initiallyHidden {
+	display: none;
+} 	
