@@ -2,40 +2,67 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
 
-	<title>PushMe - collect and explore HTTP requests</title>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>PushMe - collect and explore HTTP requests</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 
-	<object 
-		th:include="/fragments/styles :: styles" 
-		th:remove="tag">
-	</object>
-		
-	<object 
-		th:include="/fragments/scripts :: scripts" 
-		th:remove="tag">
-	</object>
+<object th:include="/fragments/styles :: styles" th:remove="tag">
+</object>
+
+<object th:include="/fragments/scripts :: scripts" th:remove="tag">
+</object>
 
 </head>
 <body>
-	
-	<p th:text="'Number of requests' + ${container.getRequestsCount()}"></p>
-	
-	<div th:if="${not #lists.isEmpty(container.requests)}">
-		<div th:each="request,iterStat : ${container.requests}">
+
+	<div class="container-fluid">
+
+		<!-- Title row -->
+    	<div class="row bottom-padding">
+    		<div class="col-md-8 col-md-offset-2">
+    			<h4 class="text-center">
+    				Below are the latest requests which were collected by this container.
+    			</h4>
+    		</div>
+    	</div>
+
+			<div th:if="${not #lists.isEmpty(container.requests)}">
 			
-			<!-- Request -->
-			<div class="panel panel-default">
-  				<div class="panel-heading">
-    				<h3 class="panel-title"><strong th:text="${request.method}">GET</strong></h3>
-  				</div>
-  				<div class="panel-body">
-    				Panel content
-  				</div>
+			<div th:each="request,iterStat : ${container.requests}">
+
+				<!-- Request -->
+				<div class="panel panel-success">
+					<div class="panel-heading">
+						<div class="panel-title">
+							<p>
+								<strong th:text="${request.method}">GET</strong>
+								<small th:text="${request.dateCreated}">07/03/1979</small>
+							</p>
+							<p>
+								<small th:text="${request.requestURI}">/x/y/z</small>
+							</p>
+						</div>
+					</div>
+					<div class="panel-body">
+					
+						<div class="thumbnail">
+      						<div class="caption">
+        						<h3>Headers</h3>
+        						
+        						<p th:each="header,iterStat : ${request.headers}"> 
+        						 	<strong th:text="${header.name} + ':'">Header name</strong> 
+        						 	<span th:text="${header.value}">Header value</span> 
+        						 </p>
+        						
+        					</div>
+						</div>
+						
+					</div>
+				</div>
+				<!-- EO: Request -->
+				
 			</div>
-			<!-- EO: Request -->
-			
 		</div>
 	</div>
-
+	
 </body>
 </html>

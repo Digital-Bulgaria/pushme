@@ -35,7 +35,10 @@ public class ContainerController {
 
 		RequestBuilder pushMeReqBuilder = new RequestBuilder(httpRequest);
 
-		Request pushMeReq = pushMeReqBuilder.buildHeaders().build();
+		Request pushMeReq = pushMeReqBuilder.
+				buildHeaders().
+				buildGeneralProps().
+				build();
 
 		pushMeReq.setContainer(container);
 

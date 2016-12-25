@@ -51,9 +51,8 @@ public class RequestBuilder {
 	
 	public RequestBuilder buildGeneralProps()
 	{
-		String method = httpRequest.getMethod();
-		
-		pushMeRequest.setMethod(method);
+		pushMeRequest.setMethod(httpRequest.getMethod());
+		pushMeRequest.setRequestURI(httpRequest.getRequestURI());
 		
 		return this;
 	}

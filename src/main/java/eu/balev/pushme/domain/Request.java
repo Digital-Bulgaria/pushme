@@ -25,6 +25,7 @@ public class Request {
 	private Date dateCreated;
 	private List<Header> headers;
 	private String method;
+	private String requestURI;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
@@ -79,4 +80,13 @@ public class Request {
 	public void setMethod(String method) {
 		this.method = method;
 	}
+	
+	public String getRequestURI() {
+		return requestURI;
+	}
+
+	public void setRequestURI(String requestURI) {
+		this.requestURI = requestURI;
+	}
+
 }
