@@ -1,6 +1,11 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
-<head th:fragment="styles">
+
+<head th:fragment="common_header(title, scripts)">
+
+	<title th:replace="${title}">Common header</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	
 	<!-- Bootstrap -->
 	<link rel="stylesheet" 
 		href="/css/bootstrap/bootstrap.min.css"
@@ -15,6 +20,16 @@
 	<link rel="stylesheet" 
 		href="/css/pushme.css"
 		th:href="@{/css/pushme.css}"/>	
+
+	<script 
+		src="/js/jquery/jquery.min.js"
+		th:src="@{/js/jquery/jquery.min.js}">
+	</script>
+	
+	<th:block th:replace="${scripts}">
+	</th:block>
+
 </head>
-<body/>
+
+<body />
 </html>

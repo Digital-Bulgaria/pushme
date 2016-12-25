@@ -1,15 +1,9 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
-<head>
+<head th:replace="/fragments/commonheader :: common_header(~{::title},~{})">
 
-<title>PushMe - collect and explore HTTP requests</title>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-
-<object th:include="/fragments/styles :: styles" th:remove="tag">
-</object>
-
-<object th:include="/fragments/scripts :: scripts" th:remove="tag">
-</object>
+	<title>PushMe - inspecting a container</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 
 </head>
 <body>
