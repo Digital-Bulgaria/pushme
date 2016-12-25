@@ -28,6 +28,7 @@ $(function() {
 	        		each(function()
 	        				{
 	        					$('#' + this.id + '_input').val(this.href);
+	        					$('#' + this.id + '_link').attr('href', this.href);
 	        				}
 	        		);
 	        	

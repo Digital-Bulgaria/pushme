@@ -150,8 +150,8 @@
     	<!-- EO: Success -->
     	
     	<a id="url_container" class="initiallyHidden" th:href="@{/containers/container_id}"></a>
-    	<a id="url_container_setup" class="initiallyHidden" th:href="@{/containers/setup(id=container_id)}"></a>
-    	<a id="url_container_inspect" class="initiallyHidden" th:href="@{/containers/isnpect(id=container_id)}"></a>
+    	<a id="url_container_setup" class="initiallyHidden" th:href="@{/containers-setup(id=container_id)}"></a>
+    	<a id="url_container_inspect" class="initiallyHidden" th:href="@{/containers-inspect(id=container_id)}"></a>
     	
     	<!-- Links -->
    		<div class="row bottom-padding">
@@ -166,7 +166,7 @@
     	<div class="row bottom-padding">
     		<div class="col-md-6 col-md-offset-3">
     			<div class="form-group">
-    				<label for="url_container_setup_input"><a href="#">Inspect URL</a> (here you may inspect the collected requests):</label>
+    				<label for="url_container_setup_input"><a id="url_container_setup_link" href="#">Setup URL</a> (here you may further setup your container):</label>
     				<input type="text" class="form-control" id="url_container_setup_input"/>
  				 </div>
     		</div>
@@ -175,7 +175,7 @@
     	<div class="row bottom-padding">
     		<div class="col-md-6 col-md-offset-3">
     			<div class="form-group">
-    				<label for="url_container_inspect_input"><a href="#">Setup URL</a> (here you may further setup your container):</label>
+    				<label for="url_container_inspect_input"><a id="url_container_inspect_link" href="#">Inspect URL</a> (here you may inspect the collected requests):</label>
     				<input type="text" class="form-control" id="url_container_inspect_input"/>
  				 </div>
     		</div>

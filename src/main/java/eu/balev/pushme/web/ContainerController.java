@@ -44,7 +44,7 @@ public class ContainerController {
 		return "response";
 	}
 
-	@RequestMapping(value = "/containers/inspect", method = RequestMethod.GET)
+	@RequestMapping(value = "/containers-inspect", method = RequestMethod.GET)
 	public ModelAndView inspectContainer(
 			@RequestParam(value = "id", required = false) String id) {
 

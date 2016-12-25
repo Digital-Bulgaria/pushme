@@ -1,10 +1,10 @@
 package eu.balev.pushme.domain;
 
 import java.util.Date;
-import java.util.LinkedList;
 import java.util.List;
 
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -13,6 +13,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.PrePersist;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
@@ -22,7 +23,8 @@ public class Request {
 	private Container container;
 	private long id;
 	private Date dateCreated;
-	private List<Header> headers = new LinkedList<>();
+	private List<Header> headers;
+	private String method;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
@@ -43,16 +45,24 @@ public class Request {
 		this.container = container;
 	}
 
+	@Column(updatable = false)
 	@Temporal(TemporalType.TIMESTAMP)
 	public Date getDateCreated() {
-		return dateCreated;
+		return dateCreated != null ? new Date(dateCreated.getTime()) : null;
+	}
+	
+	public void setDateCreated(Date date) {
+		this.dateCreated = date != null ? new Date(date.getTime()) : null;
 	}
 
-	public void setDateCreated(Date dateCreated) {
-		this.dateCreated = dateCreated;
+	@PrePersist
+	void createdAt() {
+		if (dateCreated == null) {
+			this.dateCreated = new Date();
+		}
 	}
 
-	@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+	@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	@JoinColumn(name = "request_id")
 	public List<Header> getHeaders() {
 		return headers;
@@ -60,5 +70,13 @@ public class Request {
 
 	public void setHeaders(List<Header> headers) {
 		this.headers = headers;
+	}
+	
+	public String getMethod() {
+		return method;
+	}
+
+	public void setMethod(String method) {
+		this.method = method;
 	}
 }
