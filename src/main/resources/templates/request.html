@@ -1,0 +1,17 @@
+<div class="text-left" xmlns:th="http://www.thymeleaf.org">
+	
+	<!-- The panel with the headers -->	
+	<div class="panel panel-success">
+  		<div class="panel-body">
+  			<div>
+    			<h4>Headers</h4>
+    		</div>
+    		
+    		<div th:each="header : ${request.headers}">
+    			<strong th:text="${header.name} + ':'">name</strong> <span th:text="${header.value}">value</span>
+    		</div>
+  		</div>
+	</div>
+	<!-- EO: panel with headers -->
+	
+</div>

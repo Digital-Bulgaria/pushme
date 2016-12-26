@@ -1,9 +1,15 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
-<head th:replace="/fragments/commonheader :: common_header(~{::title},~{})">
+<head th:replace="/fragments/commonheader :: common_header(~{::title},~{::script})">
 
 	<title>PushMe - inspecting a container</title>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	
+	<!-- Some JS executed on the main page -->
+	<script 
+		src="/js/inspectcontainer.js"
+		th:src="@{/js/inspectcontainer.js}">
+	</script>
 
 </head>
 <body>
@@ -36,20 +42,20 @@
 							</p>
 						</div>
 					</div>
-					<div class="panel-body">
-					
-						<div class="thumbnail">
-      						<div class="caption">
-        						<h3>Headers</h3>
-        						
-        						<p th:each="header,iterStat : ${request.headers}"> 
-        						 	<strong th:text="${header.name} + ':'">Header name</strong> 
-        						 	<span th:text="${header.value}">Header value</span> 
-        						 </p>
-        						
-        					</div>
+					<div class="panel-body" th:switch="${iterStat.first}">
+						<div 
+							th:case="true"
+							th:id="'req-id-' + ${request.id}"
+							th:attr="data-ctnr-id=${container.id},data-request-id=${request.id}"
+							class="req-container-preload text-center"
+						>
+							<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
 						</div>
-						
+						<div
+							th:case="*"
+							class="req-container text-center">
+							<i class="fa fa-download fa-3x"></i>
+						</div>
 					</div>
 				</div>
 				<!-- EO: Request -->

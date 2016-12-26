@@ -28,7 +28,7 @@ public class Container {
 		this.id = id;
 	}
 
-	public String getID() {
+	public String getId() {
 		return id;
 	}
 
