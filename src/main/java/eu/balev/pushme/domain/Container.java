@@ -9,6 +9,7 @@ import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
+import javax.persistence.OrderBy;
 
 @Entity
 public class Container {
@@ -18,6 +19,7 @@ public class Container {
 
 	@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 	@JoinColumn(name = "container_id")
+	@OrderBy("dateCreated DESC")
 	private List<Request> requests;
 
 	public Container() {
