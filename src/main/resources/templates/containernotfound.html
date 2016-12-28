@@ -1,0 +1,44 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="/fragments/commonheader :: common_header(~{::title},~{})">
+	
+    <title>PushMe - container not found</title>
+		
+</head>
+
+<body>  
+    
+    <nav 
+		th:replace="/fragments/commonnavbar :: common_navbar(~{})" 
+		class="navbar navbar-default">
+	</nav>
+    
+    <div class="container-fluid">
+    
+    	<!-- Title row -->
+    	<div class="row bottom-padding">
+    		<div class="col-md-8 col-md-offset-2">
+    			<h1 class="text-center">
+    				Ooops!
+    			</h1>
+    		</div>
+    	</div>
+    	
+    	<!-- container 404 msg -->
+    	<div class="row bottom-padding">
+    		<div class="col-md-8 col-md-offset-2">
+    			<div class="alert alert-danger" role="alert">
+    				<p class="text-center">
+    					The container that you are looking for no longer exists.
+    					PushMe remembers only limited amount of containers. 
+    					You may go back to the home page and create a new container.
+    				</p>
+    			</div>
+    		</div>
+    	</div>
+    	
+    	
+    </div>	
+</body>
+</html>
