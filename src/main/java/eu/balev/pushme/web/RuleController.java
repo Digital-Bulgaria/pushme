@@ -10,13 +10,13 @@ import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import eu.balev.pushme.service.RuleService;
 
@@ -25,7 +25,7 @@ public class RuleController {
 
 	@Autowired
 	private RuleService ruleService;
-	
+
 	private static final List<String> allRequestMethod;
 
 	private static final List<Integer> allResponseCodes;
@@ -53,25 +53,24 @@ public class RuleController {
 	}
 
 	@RequestMapping(value = "/rules-new")
-	public String newRule(RuleForm ruleForm, 
+	public String newRule(RuleForm ruleForm,
 			@RequestParam(value = "containerid") String containerId) {
-		
+
 		ruleForm.setContainerId(containerId);
-		
+
 		return "rule";
 	}
-	
+
 	@PostMapping(value = "/rules-create")
-	public String createRule(@Valid RuleForm ruleForm, 
-			BindingResult bindingResult, 
-			RedirectAttributes redirAttr) {
-		
+	public String createRule(@Valid RuleForm ruleForm,
+			BindingResult bindingResult, Model model) {
+
 		if (bindingResult.hasErrors()) {
-            return "rule";
-        }
+			return "rule";
+		}
 		
-		ruleService.createOrUpdate(ruleForm);
+		model.addAttribute("containerid", ruleForm.getContainerId());
 		
-		return "forward:/rulecreated";
+		return "rulecreated";
 	}
 }

@@ -1,6 +1,7 @@
 $(function() {
 	$("#btn_create_rule").click(function() {
 		
+		//todo - fix relative path!
 		var ctnrid = $(this).data("ctnr-id");
 		$("#new_rule").load("/rules-new?containerid=" + ctnrid, function() {
 			  attachFormListener();
@@ -19,8 +20,11 @@ function attachFormListener()
 			url : form.attr('action'),
 			data : form.serialize()
 		}).done(function(data) {
-			alert('suxes');
-			alert(data);
+			var redirectUrl = $(data).data('redirect');
+			if (redirectUrl)
+		        window.location.href=redirectUrl;//redirect
+		    else
+		        alert('replace');
 		}).fail(function(data) {
 			alert('sux');
 			alert(data);
