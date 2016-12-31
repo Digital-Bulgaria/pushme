@@ -17,11 +17,16 @@ public class Container {
 	@Id
 	private String id;
 
-	@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+	@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	@JoinColumn(name = "container_id")
 	@OrderBy("dateCreated DESC")
 	private List<Request> requests;
 
+	@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	@JoinColumn(name = "container_id")
+	@OrderBy("sortOrder")
+	private List<Rule> rules;
+	
 	public Container() {
 		id = UUID.randomUUID().toString();
 	}
@@ -34,6 +39,7 @@ public class Container {
 		return id;
 	}
 
+	//requests
 	public List<Request> getRequests() {
 		return requests;
 	}
@@ -41,9 +47,21 @@ public class Container {
 	public void setRequests(List<Request> requests) {
 		this.requests = requests;
 	}
-	
-	public int getRequestsCount()
-	{
+
+	public int getRequestsCount() {
 		return requests != null ? requests.size() : 0;
+	}
+	
+	//rules
+	public List<Rule> getRules() {
+		return rules;
+	}
+
+	public void setRules(List<Rule> rules) {
+		this.rules = rules;
+	}
+
+	public int getRulesCount() {
+		return rules != null ? rules.size() : 0;
 	}
 }

@@ -1,0 +1,52 @@
+<div xmlns:th="http://www.thymeleaf.org">
+	<form class="form-horizontal" th:object="${ruleForm}">
+		
+		<!-- method -->
+		<div class="form-group">
+			<label class="col-sm-3 control-label" for="method">When request method is:</label>
+			<div class="col-sm-9">
+			 
+				<select class="form-control" th:field="*{requestMethod}">
+					<option
+						th:each="method : ${allMethods}"
+						th:value="${method}"
+						th:text="${method}">
+						METHOD
+					/option>
+				</select>
+			</div>
+		</div>
+		<!-- eo: method -->
+		
+		<!-- return codes -->
+		<div class="form-group">
+			<label class="col-sm-3 control-label" for="method">Return code will be:</label>
+			<div class="col-sm-9"> 
+				<select class="form-control">
+					<option>404</option>
+  					<option>200</option>
+  				</select>
+			</div>
+		</div>
+		<!-- eo: return codes -->
+		
+		<!-- Response body -->
+		<div class="form-group">
+			<label class="col-sm-3 control-label" for="method">Response body will be:</label>
+			<div class="col-sm-9"> 
+				<textarea class="form-control" placeholder="OK">
+				</textarea>
+			</div>
+		</div>
+		<!-- EO: Response body -->
+		
+		<!-- Buttons -->
+		<div class="form-group">
+			<div class="col-sm-12 text-center"> 
+				<input class="btn btn-lg btn-success" type="submit" value="Submit">
+			</div>
+		</div>
+		<!-- EO: Buttons -->
+		
+	</form>
+</div>

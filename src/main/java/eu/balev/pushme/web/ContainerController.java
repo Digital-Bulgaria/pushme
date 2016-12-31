@@ -50,11 +50,23 @@ public class ContainerController {
 
 	@RequestMapping(value = "/containers-inspect", method = RequestMethod.GET)
 	public ModelAndView inspectContainer(
-			@RequestParam(value = "id", required = false) String id) {
+			@RequestParam(value = "id") String id) {
 
+		return processContainer("inspectcontainer", id);
+	}
+	
+	@RequestMapping(value = "/containers-setup", method = RequestMethod.GET)
+	public ModelAndView setupContainer(
+			@RequestParam(value = "id") String id) {
+
+		return processContainer("setupcontainer", id);
+	}
+	
+	private ModelAndView processContainer(String viewName, String ctnrID)
+	{
 		ModelAndView result = new ModelAndView();
 		
-		Container container = containerRepo.findOne(id);
+		Container container = containerRepo.findOne(ctnrID);
 		
 		if (container == null)
 		{
@@ -63,7 +75,7 @@ public class ContainerController {
 		}
 		else
 		{
-			result.setViewName("inspectcontainer");
+			result.setViewName(viewName);
 			result.addObject("container", container);
 		}
 		return result;
