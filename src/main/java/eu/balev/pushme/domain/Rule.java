@@ -21,7 +21,7 @@ public class Rule {
 	private int sortOrder;
 	
 	private String requestMethod;
-	private String responseCode;
+	private Integer responseCode;
 	private String responseBody;
 	
 
@@ -77,11 +77,11 @@ public class Rule {
 		this.requestMethod = requestMethod;
 	}
 
-	public String getResponseCode() {
+	public Integer getResponseCode() {
 		return responseCode;
 	}
 
-	public void setResponseCode(String responseCode) {
+	public void setResponseCode(Integer responseCode) {
 		this.responseCode = responseCode;
 	}
 

@@ -1,5 +1,11 @@
 <div xmlns:th="http://www.thymeleaf.org">
-	<form class="form-horizontal" th:object="${ruleForm}">
+	<form
+		class="form-horizontal" 
+		th:action="@{rules-create}"
+		th:object="${ruleForm}"
+		method="post">
+		
+		<input name="containerId" type="hidden" th:value="*{containerId}"/>
 		
 		<!-- method -->
 		<div class="form-group">
@@ -18,24 +24,28 @@
 		</div>
 		<!-- eo: method -->
 		
-		<!-- return codes -->
+		<!-- response codes -->
 		<div class="form-group">
 			<label class="col-sm-3 control-label" for="method">Return code will be:</label>
 			<div class="col-sm-9"> 
-				<select class="form-control">
-					<option>404</option>
-  					<option>200</option>
+				<select class="form-control" th:field="*{responseCode}">
+					<option
+						th:each="code : ${allResponseCodes}"
+						th:value="${code}"
+						th:text="${code}">
+						CODE
+					</option>
+					<option value="SHIT">SHIT</option>
   				</select>
 			</div>
 		</div>
-		<!-- eo: return codes -->
+		<!-- eo: response codes -->
 		
 		<!-- Response body -->
 		<div class="form-group">
 			<label class="col-sm-3 control-label" for="method">Response body will be:</label>
 			<div class="col-sm-9"> 
-				<textarea class="form-control" placeholder="OK">
-				</textarea>
+				<textarea class="form-control"></textarea>
 			</div>
 		</div>
 		<!-- EO: Response body -->

@@ -1,11 +1,26 @@
 package eu.balev.pushme.web;
 
+import javax.validation.constraints.NotNull;
+
 public class RuleForm {
 	
+	@NotNull
 	private String requestMethod;
+	
+	@NotNull
 	private Integer responseCode;
+	
 	private String responseBody;
 	
+	@NotNull
+	private String containerId;
+	
+	public String getContainerId() {
+		return containerId;
+	}
+	public void setContainerId(String containerId) {
+		this.containerId = containerId;
+	}
 	public String getRequestMethod() {
 		return requestMethod;
 	}
