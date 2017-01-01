@@ -20,9 +20,25 @@
 	</nav>
     
     <div class="container-fluid">
+    
+    	<!-- New rule created -->
+    	<div th:if="${newrule}" class="row bottom-padding">
+    		<div class="col-md-8 col-md-offset-2">
+    			<div class="alert alert-success" role="alert">
+    				<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+    				<p class="text-center">
+    					<i class="fa fa-check fa-2x" aria-hidden="true"></i> 
+    				</p>
+    				<p class="text-center">
+    					You have successfully created a new rule for your container
+    				</p>
+    			</div>
+    		</div>
+    	</div>
+    	<!-- EO: New rule created -->
     	
     	<!-- Explanation -->
-    	<div class="row bottom-padding">
+    	<div th:if="${#lists.isEmpty(container.rules)}" class="row bottom-padding">
     		<div class="col-md-8 col-md-offset-2">
     			<div class="alert alert-success" role="alert">
     				<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
@@ -73,6 +89,32 @@
     		</div>
     	</div>
     	<!-- EO: The new rule -->
+    	
+    	<!-- Rule list -->
+    	<div th:unless="${#lists.isEmpty(container.rules)}" class="row bottom-padding">
+    		<div class="col-md-8 col-md-offset-2">
+    			<table class="table">
+    				<thead>
+    					<tr>
+    						<th>#</th>
+    						<th>Description</th>
+    						<th>Actions</th>
+    					</tr>
+    				</thead>
+    				
+    				<tbody>
+    					<tr th:each="rule, iterStat : ${container.rules}">
+    						<td th:text="${iterStat.count}">1</td>
+    						<td th:text="${rule.requestMethod} + ' | ' + ${rule.responseCode}"></td>
+    						<td></td>
+    					</tr>
+    				</tbody>
+    				
+    			</table>
+    		</div>
+    	</div>
+    	<!-- EO: Rule list -->
+    	
     </div>	
 </body>
 </html>

@@ -57,12 +57,21 @@ public class ContainerController {
 	
 	@RequestMapping(value = "/containers-setup", method = RequestMethod.GET)
 	public ModelAndView setupContainer(
-			@RequestParam(value = "id") String id) {
+			@RequestParam(value = "id") String id,
+			@RequestParam(value = "newrule", required=false) String newrule) {
 
-		return processContainer("setupcontainer", id);
+		ModelAndView ret = processContainer("setupcontainer", id);
+		
+		if (newrule != null)
+		{
+			ret.addObject("newrule", newrule);
+		}
+		
+		return ret;
 	}
 	
-	private ModelAndView processContainer(String viewName, String ctnrID)
+	private ModelAndView processContainer(String viewName, 
+			String ctnrID)
 	{
 		ModelAndView result = new ModelAndView();
 		

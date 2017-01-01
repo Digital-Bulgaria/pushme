@@ -69,6 +69,8 @@ public class RuleController {
 			return "rule";
 		}
 		
+		ruleService.createOrUpdate(ruleForm);
+		
 		model.addAttribute("containerid", ruleForm.getContainerId());
 		
 		return "rulecreated";

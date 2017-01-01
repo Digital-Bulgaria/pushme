@@ -60,8 +60,4 @@ public class Container {
 	public void setRules(List<Rule> rules) {
 		this.rules = rules;
 	}
-
-	public int getRulesCount() {
-		return rules != null ? rules.size() : 0;
-	}
 }
