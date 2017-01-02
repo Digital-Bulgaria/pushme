@@ -8,7 +8,7 @@
 		<input name="containerId" type="hidden" th:value="*{containerId}"/>
 		
 		<!-- method -->
-		<div class="form-group">
+		<div class="form-group required">
 			<label class="col-sm-3 control-label" for="method">When request method is:</label>
 			<div class="col-sm-9">
 			 
@@ -20,15 +20,21 @@
 						METHOD
 					</option>
 				</select>
+				<div 
+  					th:if="${#fields.hasErrors('requestMethod')}"
+  					class="alert alert-danger" role="alert">
+  					<i class="fa fa-exclamation-circle" aria-hidden="true"></i>
+  					Invalid method!
+				</div>
 			</div>
 		</div>
 		<!-- eo: method -->
 		
 		<!-- response codes -->
-		<div class="form-group">
+		<div class="form-group required">
 			<label class="col-sm-3 control-label" for="method">Return code will be:</label>
 			<div class="col-sm-9"> 
-				<select class="form-control" th:field="*{responseCode}">
+				<select class="bottom-padding form-control" th:field="*{responseCode}">
 					<option
 						th:each="code : ${allResponseCodes}"
 						th:value="${code}"
@@ -37,7 +43,14 @@
 					</option>
 					<option value="SHIT">SHIT</option>
   				</select>
+  				<div 
+  					th:if="${#fields.hasErrors('responseCode')}"
+  					class="alert alert-danger" role="alert">
+  					<i class="fa fa-exclamation-circle" aria-hidden="true"></i>
+  					Invalid return code!
+				</div>
 			</div>
+			<!--  <td th:if="${#fields.hasErrors('name')}" th:errors="*{name}">Name Error</td>-->
 		</div>
 		<!-- eo: response codes -->
 		
@@ -45,7 +58,9 @@
 		<div class="form-group">
 			<label class="col-sm-3 control-label" for="method">Response body will be:</label>
 			<div class="col-sm-9"> 
-				<textarea class="form-control"></textarea>
+				<textarea 
+					class="form-control" 
+					th:field="*{responseBody}"></textarea>
 			</div>
 		</div>
 		<!-- EO: Response body -->

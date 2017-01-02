@@ -24,10 +24,10 @@ function attachFormListener()
 			if (redirectUrl)
 		        window.location.href=redirectUrl;//redirect
 		    else
-		        alert('replace');
+		    	$("#new_rule").html(data);
+				attachFormListener();//careful!
 		}).fail(function(data) {
-			alert('sux');
-			alert(data);
+			$("#new_rule").html(data);
 		});
 	});
 }
