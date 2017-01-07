@@ -1,6 +1,11 @@
-/*Increases the space between rows*/
-.bottom-padding {
+/*Increases the space between blocks in the app, e.g. rows*/
+.bottom-margin {
 	margin-bottom: 20px;
+}
+
+/*Adds some padding to the top of the block items*/
+.top-margin {
+	margin-top: 20px;
 }
 
 /*used to power some jquery goodies*/

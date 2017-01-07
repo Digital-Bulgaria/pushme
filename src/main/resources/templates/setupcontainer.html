@@ -22,7 +22,7 @@
     <div class="container-fluid">
     
     	<!-- New rule created -->
-    	<div th:if="${newrule}" class="row bottom-padding">
+    	<div th:if="${newrule}" class="row bottom-margin">
     		<div class="col-md-8 col-md-offset-2">
     			<div class="alert alert-success" role="alert">
     				<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
@@ -38,7 +38,7 @@
     	<!-- EO: New rule created -->
     	
     	<!-- Explanation -->
-    	<div th:if="${#lists.isEmpty(container.rules)}" class="row bottom-padding">
+    	<div th:if="${#lists.isEmpty(container.rules)}" class="row bottom-margin">
     		<div class="col-md-8 col-md-offset-2">
     			<div class="alert alert-success" role="alert">
     				<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
@@ -64,7 +64,7 @@
     	<!-- EO: explanation -->
     	
     	<!-- Create a new rule -->
-		<div class="row bottom-padding">
+		<div class="row bottom-margin">
     		<div class="col-md-8 col-md-offset-2">
     		
     			<div class="text-center">     
@@ -81,7 +81,7 @@
     	<!-- EO: Create a new rule -->
     	
     	<!-- The new rule -->
-    	<div class="row bottom-padding">
+    	<div class="row bottom-margin">
     		<div class="col-md-8 col-md-offset-2">
     			<div id="new_rule">
     		
@@ -91,7 +91,7 @@
     	<!-- EO: The new rule -->
     	
     	<!-- Rule list -->
-    	<div th:unless="${#lists.isEmpty(container.rules)}" class="row bottom-padding">
+    	<div th:unless="${#lists.isEmpty(container.rules)}" class="row bottom-margin">
     		<div class="col-md-8 col-md-offset-2">
     			<table class="table">
     				<thead>
