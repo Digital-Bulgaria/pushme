@@ -1,5 +1,7 @@
 <!DOCTYPE HTML>
-<html xmlns:th="http://www.thymeleaf.org">
+<html 
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
 
 <head th:replace="/fragments/commonheader :: common_header(~{::title},~{::script})">
 	
@@ -35,6 +37,7 @@
     					in a human friendly manner. PushMe is especially useful in projects
     					where push notifications should be tested from behind a firewall.
     				</p>
+    				
     			</div>
     		</div>
     	</div>

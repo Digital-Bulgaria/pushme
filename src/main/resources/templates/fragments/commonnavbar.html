@@ -1,5 +1,8 @@
 <!DOCTYPE HTML>
-<html xmlns:th="http://www.thymeleaf.org">
+<html 
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4"
+>
 
 <head/>
 <body>
@@ -29,10 +32,17 @@
       			
      
       			<ul class="nav navbar-nav navbar-right">
-      				<li th:class="${active} == 'login' ? 'active'">
+      				
+      				<li sec:authorize="isAuthenticated()">
+    				 	<form th:action="@{/logout}" method="post">
+		            	    <button type="submit">Log out</button>
+        			    </form>
+    				 </li>
+      			
+      				<li sec:authorize="!isAuthenticated()" th:class="${active} == 'login' ? 'active'">
         				<a th:href="@{/login}" href="#">Login</a>
         			</li>
-        			<li><a href="#">Register</a></li>
+        			<li sec:authorize="!isAuthenticated()"><a href="#">Register</a></li>
       			</ul>
     		</div><!-- /.navbar-collapse -->
   		</div><!-- /.container-fluid -->
