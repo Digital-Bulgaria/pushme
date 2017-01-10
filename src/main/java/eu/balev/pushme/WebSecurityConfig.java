@@ -30,6 +30,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 					logoutUrl("/logout").
 					logoutSuccessUrl("/home")
 				.permitAll();
+		
+		http.csrf().ignoringAntMatchers("/h2-console/**");
+		http.headers().frameOptions().disable();
 	}
 
 	@Autowired

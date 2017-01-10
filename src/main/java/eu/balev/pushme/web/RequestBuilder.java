@@ -49,6 +49,29 @@ public class RequestBuilder {
 		return this;
 	}
 	
+	public RequestBuilder buildRequestFrom() 
+	{
+		String requestFrom = null;
+
+		String xff = httpRequest.getHeader("X-FORWARDED-FOR");
+		if (xff != null && !xff.isEmpty()) 
+		{
+			requestFrom = xff;
+		} 
+		else 
+		{
+			String remoteIP = httpRequest.getRemoteAddr();
+			if (remoteIP != null && !remoteIP.isEmpty()) 
+			{
+				requestFrom = remoteIP;
+			}
+		}
+
+		pushMeRequest.setRequestFrom(requestFrom);
+
+		return this;
+	}
+	
 	public RequestBuilder buildGeneralProps()
 	{
 		pushMeRequest.setMethod(httpRequest.getMethod());
