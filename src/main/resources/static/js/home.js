@@ -10,6 +10,9 @@ $(function() {
 	//create a container code
 	$( "#btn_create_container" ).click(function() {
 		$(this).prop('disabled', true);
+		var csrf_name = $(this).data( "csrf_name" );
+		var csrf_value = $(this).data( "csrf_value" );
+		
 		$("#btn_create_container_new, #btn_create_container_working").toggle();
 		
 		$.ajax({
@@ -17,6 +20,10 @@ $(function() {
 	        contentType: 'application/json',
 	        url: '/api/containers/container',
 	        dataType: "json",
+	        beforeSend: function(xhr) {
+	            // csrf handling
+	            xhr.setRequestHeader(csrf_name, csrf_value);
+	        },
 	        success: function(data, textStatus, jqXHR){
 	        	//toggle the working to done
 	        	$("#btn_create_container_working, #btn_create_container_done").toggle();
@@ -36,7 +43,7 @@ $(function() {
 	        	
 	        },
 	        error: function(jqXHR, textStatus, errorThrown){
-	            alert('error: ' + textStatus);
+	            console.log('error: ' + textStatus);
 	        }
 	    });
 		

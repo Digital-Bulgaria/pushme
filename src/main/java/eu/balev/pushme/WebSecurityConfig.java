@@ -19,12 +19,13 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 		http.authorizeRequests().
-					anyRequest().permitAll().and().
-					
+					antMatchers("/**").
+					permitAll().and().
 				formLogin().
 					loginPage("/login").
 					failureUrl("/login?error").
-					successForwardUrl("/home").permitAll().and().
+					successForwardUrl("/home").
+					permitAll().and().
 				logout().
 					logoutUrl("/logout").
 					logoutSuccessUrl("/home")

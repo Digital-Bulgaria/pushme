@@ -13,6 +13,12 @@
 		th:src="@{/js/home.js}">
 	</script>
 	
+	<!-- Some JS executed on the main page -->
+	<script 
+		src="/js/pushme.js"
+		th:src="@{/js/pushme.js}">
+	</script>
+	
 </head>
 
 <body>
@@ -135,7 +141,9 @@
     			<div class="text-center">     
         				<button 
 		    				id="btn_create_container" 
-    						class="btn btn-lg btn-success">
+    						class="btn btn-lg btn-success"
+    						th:attr="data-csrf_name=${_csrf.headerName},data-csrf_value=${_csrf.token}"
+    						>
     						<span id="btn_create_container_new"><i class="fa fa-plus fa-lg"></i> New container</span>
     						<span id="btn_create_container_working" class="initiallyHidden"><i class="fa fa-cog fa-spin fa-lg fa-fw"></i> Working...</span>
     						<span id="btn_create_container_done" class="initiallyHidden"><i class="fa fa-check fa-lg"></i> Done</span>
