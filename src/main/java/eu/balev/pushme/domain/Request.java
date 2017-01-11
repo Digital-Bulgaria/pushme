@@ -24,6 +24,7 @@ public class Request {
 	private long id;
 	private Date dateCreated;
 	private List<Header> headers;
+	private List<Parameter> parameters;
 	private String method;
 	private String requestURI;
 	private String requestFrom;
@@ -72,6 +73,16 @@ public class Request {
 
 	public void setHeaders(List<Header> headers) {
 		this.headers = headers;
+	}
+	
+	@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	@JoinColumn(name = "request_id")
+	public List<Parameter> getParameters() {
+		return parameters;
+	}
+
+	public void setParameters(List<Parameter> parameters) {
+		this.parameters = parameters;
 	}
 	
 	public String getMethod() {

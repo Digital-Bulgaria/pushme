@@ -38,6 +38,7 @@ public class ContainerController {
 
 		Request pushMeReq = pushMeReqBuilder.
 				buildHeaders().
+				buildParameters().
 				buildGeneralProps().
 				buildRequestFrom().
 				build();

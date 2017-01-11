@@ -3,10 +3,15 @@ package eu.balev.pushme.web;
 import java.util.Enumeration;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
+
+import java.util.stream.Stream;
 
 import javax.servlet.http.HttpServletRequest;
 
+
 import eu.balev.pushme.domain.Header;
+import eu.balev.pushme.domain.Parameter;
 import eu.balev.pushme.domain.Request;
 
 public class RequestBuilder {
@@ -45,6 +50,34 @@ public class RequestBuilder {
 		}
 		
 		pushMeRequest.setHeaders(pushMeHeaders);
+		
+		return this;
+	}
+	
+	public RequestBuilder buildParameters()
+	{
+		List<Parameter> pushMeParameters = new LinkedList<>();
+		
+		Map<String, String[]> parameters = httpRequest.getParameterMap();
+		
+		parameters.
+			entrySet().
+			stream().
+			forEach(entry -> 
+				{
+					String paramName = entry.getKey();
+					Stream.of(entry.getValue()).forEach(paramValue ->
+					{
+						Parameter pushMeParameter = new Parameter();
+						pushMeParameter.setName(paramName);
+						pushMeParameter.setValue(paramValue);
+						
+						pushMeParameters.add(pushMeParameter);
+					}
+				);
+				});
+		
+		pushMeRequest.setParameters(pushMeParameters);
 		
 		return this;
 	}

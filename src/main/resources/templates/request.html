@@ -1,17 +1,42 @@
 <div class="text-left" xmlns:th="http://www.thymeleaf.org">
 	
-	<!-- The panel with the headers -->	
-	<div class="panel panel-success">
-  		<div class="panel-body">
-  			<div>
-    			<h4>Headers</h4>
-    		</div>
+	<div class="container-fluid">
+		<div class="row bottom-margin">
     		
-    		<div th:each="header : ${request.headers}">
-    			<strong th:text="${header.name} + ':'">name</strong> <span th:text="${header.value}">value</span>
-    		</div>
-  		</div>
+    		<div class="col-md-4">
+			
+				<!--/* The params */-->
+				<div class="panel panel-success">
+    				<div class="panel-body">	
+    					<div>
+    						<h4>Parameters</h4>
+    					</div>
+    					<div th:each="parameter : ${request.parameters}">
+    						<strong th:text="${parameter.name} + ':'">name</strong> <span th:text="${parameter.value}">value</span>
+    					</div>
+  					</div>
+				</div>	
+				<!--/* EO: The params */-->
+			</div>
+    		
+    		<div class="col-md-8">
+				<!--/* The headers */-->
+				<div class="panel panel-success">
+  					<div class="panel-body">
+  						<div>
+    						<h4>Headers</h4>
+    					</div>
+    		
+    					<div th:each="header : ${request.headers}">
+    						<strong th:text="${header.name} + ':'">name</strong> <span th:text="${header.value}">value</span>
+    					</div>
+    				</div>
+				</div>
+				<!--/* EO: Headers */-->
+			</div>
+			
+			
+		</div>
 	</div>
-	<!-- EO: panel with headers -->
 	
 </div>
