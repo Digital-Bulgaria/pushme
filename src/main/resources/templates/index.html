@@ -134,6 +134,23 @@
     	
     	<!-- EO: Steps -->
     	
+    	<!-- Warn for anonymous users -->
+    	<div sec:authorize="!isAuthenticated()" class="row bottom-margin">
+    		<div class="col-md-6 col-md-offset-3">
+    			<div class="alert alert-warning" role="alert">
+    				<p class="text-center">
+    					<i class="fa fa-warning fa-2x" aria-hidden="true"></i> 
+    				</p>
+    				<p class="text-center">
+    					You are currently not logged in. You still can create a container anonymously
+    					but anonymous containers have serious limitations. <a href="#">More...</a>
+    				</p>
+    				
+    			</div>
+    		</div>
+    	</div>
+    	<!-- EO: Anonymous users. -->
+    	
     	<!-- Create a container -->
 		<div class="row bottom-margin">
     		<div class="col-md-8 col-md-offset-2">

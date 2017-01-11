@@ -14,33 +14,61 @@
 </head>
 <body>
 
+	<nav 
+		th:replace="/fragments/commonnavbar :: common_navbar(~{})" 
+		class="navbar navbar-default">
+	</nav>
+
 	<div class="container-fluid">
-
-		<!-- Title row -->
-    	<div class="row bottom-margin">
-    		<div class="col-md-8 col-md-offset-2">
-    			<h4 class="text-center">
-    				Below are the latest requests which were collected by this container.
-    			</h4>
-    		</div>
-    	</div>
-
-			<div th:if="${not #lists.isEmpty(container.requests)}">
+	
+		<div th:if="${#lists.isEmpty(container.requests)}">
 			
+			<!-- Title row -->
+    		<div class="row bottom-margin">
+    			<div class="col-md-8 col-md-offset-2">
+    				<div class="alert alert-success" role="alert">
+    					<p class="text-center">
+    						<i class="fa fa-info-circle fa-2x" aria-hidden="true"></i> 
+    					</p>
+    					<p class="text-center">
+    						Currently your container is empty. This means that it hasn't captured any requests.
+    						You can send requests to the URL of the container and later inspect them.
+    					</p>
+	    			</div>
+    			</div>
+    		</div>
+    		
+    	</div>
+	
+		<div th:if="${not #lists.isEmpty(container.requests)}">
+			
+			<!-- Title row -->
+    		<div class="row bottom-margin">
+    			<div class="col-md-8 col-md-offset-2">
+    				<div class="alert alert-success" role="alert">
+    					<p class="text-center">
+    						<i class="fa fa-info-circle fa-2x" aria-hidden="true"></i> 
+    					</p>
+    					<p class="text-center">
+    						Below are the latest requests which were collected by this container.
+    					</p>
+	    			</div>
+    			</div>
+    		</div>
+    	
 			<div th:each="request,iterStat : ${container.requests}">
 
 				<!-- Request -->
 				<div class="panel panel-success">
 					<div class="panel-heading">
-						<div class="panel-title">
-							<p>
-								<strong th:text="${request.method}">GET</strong>
-								<small th:text="${request.dateCreated}">07/03/1979</small>
-							</p>
-							<p>
-								<small th:text="${request.requestURI}">/x/y/z</small>
-							</p>
+						<div class="panel-title pull-left">
+							<strong th:text="${request.method}">GET</strong> <small th:text="${request.dateCreated}">07/03/1979</small><br/>
+							<small th:text="${request.requestURI}">/x/y/z</small>
 						</div>
+					    <div class="panel-title pull-right">
+						    <small>From: </small><small th:text="${request.requestFrom}">1.1.1.1</small>
+					    </div>
+        				<div class="clearfix"></div>
 					</div>
 					<div class="panel-body" th:switch="${iterStat.first}">
 						<div 
