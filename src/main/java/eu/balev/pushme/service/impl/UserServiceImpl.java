@@ -6,7 +6,7 @@ import org.springframework.stereotype.Service;
 import eu.balev.pushme.domain.User;
 import eu.balev.pushme.repository.UserRepository;
 import eu.balev.pushme.service.UserService;
-import eu.balev.pushme.web.UserRegistrationForm;
+import eu.balev.pushme.web.user.UserRegistrationForm;
 
 @Service
 public class UserServiceImpl implements UserService {

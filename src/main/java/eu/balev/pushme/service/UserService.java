@@ -1,6 +1,6 @@
 package eu.balev.pushme.service;
 
-import eu.balev.pushme.web.UserRegistrationForm;
+import eu.balev.pushme.web.user.UserRegistrationForm;
 
 public interface UserService {
 	

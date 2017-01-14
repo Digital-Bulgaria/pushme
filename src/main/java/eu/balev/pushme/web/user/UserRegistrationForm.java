@@ -1,4 +1,4 @@
-package eu.balev.pushme.web;
+package eu.balev.pushme.web.user;
 
 import javax.validation.constraints.NotNull;
 
