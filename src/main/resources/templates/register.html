@@ -27,30 +27,30 @@
 
                     <div class="top-margin panel-body" >
                         
-                        <div class="form-group">
-								<div class="col-md-12 control">
-									<div>
-										Creating a registration in PushMe is easy! 
-										Just fill in the fields below.
-									</div>
-								</div>
-							</div>
-                             
                         <form id="registerform" 
                         	class="form-horizontal" 
                         	role="form" 
-                        	action="/register" 
-                        	th:action="@{/register}"
+                        	action="/register-create" 
+                        	th:action="@{/register-create}"
                         	method="post">
+                        	
+                        	<div class="form-group">
+								<div class="col-md-12 control bottom-margin">
+									<div class="text-center">
+										Creating a registration in PushMe is really easy! 
+										Just fill in the form below and you will enjoy a new account.
+									</div>
+								</div>
+							</div>
                             
                             <!-- User -->        
                             <div class="bottom-margin input-group">
                                         <span class="input-group-addon"><i class="fa fa-user" aria-hidden="true"></i></span>
                                         <input 
-                                        	id="login-username" 
                                         	type="text" 
                                         	class="form-control" 
-                                        	name="username" 
+                                        	th:value="*{userEmail}"
+                                        	name="useremail" 
                                         	value="" placeholder="Email Address">                                        
                             </div>
                             <!-- EO: User -->    
@@ -59,8 +59,8 @@
                             <div class="bottom-margin input-group">
                                         <span class="input-group-addon"><i class="fa fa-lock"></i></span>
                                         <input 
-                                        	id="login-password" 
                                         	type="password" 
+                                        	th:value="*{userPassword}"
                                         	class="form-control" 
                                         	name="password" placeholder="Password">
                             </div>
@@ -70,10 +70,11 @@
                             <div class="bottom-margin input-group">
                                         <span class="input-group-addon"><i class="fa fa-lock"></i></span>
                                         <input 
-                                        	id="login-password-repeat" 
                                         	type="password" 
+                                        	th:value="*{userPasswordRepeat}"
                                         	class="form-control" 
-                                        	name="password-repeat" placeholder="Repeat Password">
+                                        	name="password-repeat" 
+                                        	placeholder="Repeat Password">
                             </div>
                             <!-- EO: Pass retry -->
                                 
@@ -95,7 +96,7 @@
         	</div>
          </div> 
     </div>
-    <!-- EO: The login box -->
+    <!-- EO: The registration box -->
         
 </body>
 </html>
