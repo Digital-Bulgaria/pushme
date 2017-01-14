@@ -3,14 +3,14 @@
 
 <head th:replace="/fragments/commonheader :: common_header(~{::title},~{})">
 	
-    <title>PushMe - collect and explore HTTP requests</title>
+    <title>PushMe - register a new user</title>
 	
 </head>
 
 <body>
 
 	<nav 
-		th:replace="/fragments/commonnavbar :: common_navbar('login')" 
+		th:replace="/fragments/commonnavbar :: common_navbar('register')" 
 		class="navbar navbar-default">
 	</nav>
 
@@ -22,21 +22,25 @@
             <div class="panel panel-success" >
             
                     <div class="panel-heading">
-                        <div class="panel-title">Sign In</div>
+                        <div class="panel-title">User registration</div>
                     </div>     
 
                     <div class="top-margin panel-body" >
- 						
- 						
-                        <div th:if="${param.error}" id="login-alert" class="alert alert-danger col-sm-12">
-                        	Invalid email and password combination...
-                        </div>
+                        
+                        <div class="form-group">
+								<div class="col-md-12 control">
+									<div>
+										Creating a registration in PushMe is easy! 
+										Just fill in the fields below.
+									</div>
+								</div>
+							</div>
                              
-                        <form id="loginform" 
+                        <form id="registerform" 
                         	class="form-horizontal" 
                         	role="form" 
-                        	action="/login" 
-                        	th:action="@{/login}"
+                        	action="/register" 
+                        	th:action="@{/register}"
                         	method="post">
                             
                             <!-- User -->        
@@ -61,25 +65,27 @@
                                         	name="password" placeholder="Password">
                             </div>
                             <!-- EO: Pass -->
+                            
+                            <!-- Pass retry -->
+                            <div class="bottom-margin input-group">
+                                        <span class="input-group-addon"><i class="fa fa-lock"></i></span>
+                                        <input 
+                                        	id="login-password-repeat" 
+                                        	type="password" 
+                                        	class="form-control" 
+                                        	name="password-repeat" placeholder="Repeat Password">
+                            </div>
+                            <!-- EO: Pass retry -->
                                 
-                            <!-- Login btn -->    
+                            <!-- Register btn -->    
                             <div class="bottom-margin form-group">
                                 <!-- Button -->
                             	<div class="col-sm-12 controls">
-									<button class="btn btn-success">Login</button>
+									<button class="btn btn-success">Register</button>
                             	</div>
                             </div>
-                            <!-- EO: Login btn -->
-
-
-							<div class="form-group">
-								<div class="col-md-12 control">
-									<div>
-										Don't have an account?
-										<a href="#">Sign Up Here</a>
-									</div>
-								</div>
-							</div>    
+                            <!-- EO: Register btn -->
+							    
 					</form>     
 
 
