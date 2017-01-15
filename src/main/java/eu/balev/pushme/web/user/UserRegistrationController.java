@@ -1,20 +1,26 @@
 package eu.balev.pushme.web.user;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.web.authentication.WebAuthenticationDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.WebDataBinder;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.servlet.ModelAndView;
+
+import eu.balev.pushme.domain.User;
+import eu.balev.pushme.service.UserService;
 
 @Controller
 public class UserRegistrationController {
@@ -23,35 +29,55 @@ public class UserRegistrationController {
 			.getLogger(UserRegistrationController.class);
 
 	@Autowired
+	private UserService userService;
+	
+	@Autowired
 	private UserRegistrationFormValidator userRegFormValidator;
+	
+	@Autowired
+    protected AuthenticationManager authenticationManager;
 
 	@InitBinder
 	public void initBinder(WebDataBinder binder) {
 		binder.addValidators(userRegFormValidator);
 	}
 
-	@RequestMapping(value = "/register", method = RequestMethod.GET)
-	public ModelAndView register(
-			@RequestParam(name = "error", required = false) String error) {
+	@GetMapping(value = "/register")
+	public String register(
+			UserRegistrationForm userRegistrationForm) {
 
-		LOGGER.debug("Serving a registration page, error={}", error);
+		LOGGER.debug("Serving a fresh registration page");
 
-		ModelAndView ret = new ModelAndView();
-
-		ret.setViewName("register");
-		ret.addObject("error", error);
-
-		return ret;
+		return "register";
 	}
 
 	@PostMapping(value = "/register-create")
 	public String createRule(@Valid UserRegistrationForm regForm,
-			BindingResult bindingResult, Model model) {
+			BindingResult bindingResult, Model model,
+			HttpServletRequest request) {
 
 		if (bindingResult.hasErrors()) {
 			return "register";
 		}
 
+		userService.createUser(regForm);
+		
+		authenticateUserAndSetSession(regForm.getUserEmail(), regForm.getUserPassword(), request);
+		
 		return "home";
 	}
+	
+	private void authenticateUserAndSetSession(String uName, String uPassword, HttpServletRequest request) {
+		
+        UsernamePasswordAuthenticationToken token = new UsernamePasswordAuthenticationToken(uName, uPassword);
+
+        // generate session if one doesn't exist
+        request.getSession();
+
+        token.setDetails(new WebAuthenticationDetails(request));
+        
+        Authentication authenticatedUser = authenticationManager.authenticate(token);
+
+        SecurityContextHolder.getContext().setAuthentication(authenticatedUser);
+    }
 }

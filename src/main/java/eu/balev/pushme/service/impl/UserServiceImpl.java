@@ -1,6 +1,7 @@
 package eu.balev.pushme.service.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import eu.balev.pushme.domain.User;
@@ -15,13 +16,17 @@ public class UserServiceImpl implements UserService {
 	UserRepository userRepo;
 	
 	@Override
-	public void registerUser(UserRegistrationForm userRegForm) {
-		// TODO Auto-generated method stub
+	public User createUser(UserRegistrationForm userRegForm) {
+
+		//prepare the user
 		User user = new User();
 		
+		//set fields
 		user.setEmail(userRegForm.getUserEmail());
-		//todo
-		userRepo.save(user);
+		user.setPasswordHash(new BCryptPasswordEncoder().encode(userRegForm.getUserPassword()));
+		
+		//store the user
+		return userRepo.save(user);
 	}
 
 }

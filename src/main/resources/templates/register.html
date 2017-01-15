@@ -26,11 +26,11 @@
                     </div>     
 
                     <div class="top-margin panel-body" >
-                        
+                                             
                         <form id="registerform" 
                         	class="form-horizontal" 
                         	role="form" 
-                        	action="/register-create" 
+                        	th:object="${userRegistrationForm}" 
                         	th:action="@{/register-create}"
                         	method="post">
                         	
@@ -49,7 +49,7 @@
                                         <input 
                                         	type="text" 
                                         	class="form-control" 
-                                        	th:value="*{userEmail}"
+                                        	th:field="*{userEmail}"
                                         	name="useremail" 
                                         	value="" placeholder="Email Address">                                        
                             </div>
@@ -60,7 +60,7 @@
                                         <span class="input-group-addon"><i class="fa fa-lock"></i></span>
                                         <input 
                                         	type="password" 
-                                        	th:value="*{userPassword}"
+                                        	th:field="*{userPassword}"
                                         	class="form-control" 
                                         	name="password" placeholder="Password">
                             </div>
@@ -71,7 +71,7 @@
                                         <span class="input-group-addon"><i class="fa fa-lock"></i></span>
                                         <input 
                                         	type="password" 
-                                        	th:value="*{userPasswordRepeat}"
+                                        	th:field="*{userPasswordRepeat}"
                                         	class="form-control" 
                                         	name="password-repeat" 
                                         	placeholder="Repeat Password">
