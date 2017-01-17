@@ -43,7 +43,7 @@
 								</div>
 							</div>
                             
-                            <!-- User -->        
+                            <!-- User Email-->        
                             <div class="bottom-margin input-group">
                                         <span class="input-group-addon"><i class="fa fa-user" aria-hidden="true"></i></span>
                                         <input 
@@ -51,9 +51,18 @@
                                         	class="form-control" 
                                         	th:field="*{userEmail}"
                                         	name="useremail" 
-                                        	value="" placeholder="Email Address">                                        
-                            </div>
-                            <!-- EO: User -->    
+                                        	value="" placeholder="Email Address">
+                           </div>
+                           
+                           <div 
+  								th:if="${#fields.hasErrors('userEmail')}"
+  								th:errors="*{userEmail}"
+  								class="alert alert-danger" role="alert">
+  								<i class="fa fa-exclamation-circle" aria-hidden="true"></i>
+  								Invalid email!
+							</div>    
+                           
+                            <!-- EO: User Email-->    
                             
                             <!-- Pass -->
                             <div class="bottom-margin input-group">
@@ -64,6 +73,15 @@
                                         	class="form-control" 
                                         	name="password" placeholder="Password">
                             </div>
+                            
+                            <div 
+  								th:if="${#fields.hasErrors('userPassword')}"
+  								th:errors="*{userPassword}"
+  								class="alert alert-danger" role="alert">
+  								<i class="fa fa-exclamation-circle" aria-hidden="true"></i>
+  								Invalid password
+							</div>    
+                            
                             <!-- EO: Pass -->
                             
                             <!-- Pass retry -->
@@ -76,6 +94,15 @@
                                         	name="password-repeat" 
                                         	placeholder="Repeat Password">
                             </div>
+                            
+                            <div 
+  								th:if="${#fields.hasErrors('userPasswordRepeat')}"
+  								th:errors="*{userPasswordRepeat}"
+  								class="alert alert-danger" role="alert">
+  								<i class="fa fa-exclamation-circle" aria-hidden="true"></i>
+  								Invalid password repeat
+							</div> 
+                            
                             <!-- EO: Pass retry -->
                                 
                             <!-- Register btn -->    

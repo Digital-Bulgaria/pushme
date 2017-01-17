@@ -19,7 +19,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.PostMapping;
 
-import eu.balev.pushme.domain.User;
 import eu.balev.pushme.service.UserService;
 
 @Controller
@@ -52,7 +51,7 @@ public class UserRegistrationController {
 	}
 
 	@PostMapping(value = "/register-create")
-	public String createRule(@Valid UserRegistrationForm regForm,
+	public String createRule(@Valid UserRegistrationForm userRegistrationForm,
 			BindingResult bindingResult, Model model,
 			HttpServletRequest request) {
 
@@ -60,11 +59,11 @@ public class UserRegistrationController {
 			return "register";
 		}
 
-		userService.createUser(regForm);
+		userService.createUser(userRegistrationForm);
 		
-		authenticateUserAndSetSession(regForm.getUserEmail(), regForm.getUserPassword(), request);
+		authenticateUserAndSetSession(userRegistrationForm.getUserEmail(), userRegistrationForm.getUserPassword(), request);
 		
-		return "home";
+		return "index";
 	}
 	
 	private void authenticateUserAndSetSession(String uName, String uPassword, HttpServletRequest request) {

@@ -39,13 +39,14 @@ public class UserRegistrationFormValidator implements Validator {
 
     private void validatePasswords(Errors errors, UserRegistrationForm form) {
         if (!form.getUserPassword().equals(form.getUserPasswordRepeat())) {
-            errors.reject("password.no_match", "Passwords do not match");
+            errors.rejectValue("userPassword", "user.reg.password.no_match");
+            errors.rejectValue("userPasswordRepeat", "user.reg.password.no_match");
         }
     }
 
     private void validateEmail(Errors errors, UserRegistrationForm form) {
         if (userRepository.findOneByEmail(form.getUserEmail()).isPresent()) {
-            errors.reject("email.exists", "User with this email already exists");
+        	errors.rejectValue("userEmail", "user.reg.email.exists");
         }
     }
 }

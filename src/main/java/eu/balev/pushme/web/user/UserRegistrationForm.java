@@ -1,16 +1,23 @@
 package eu.balev.pushme.web.user;
 
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+
+import org.hibernate.validator.constraints.Email;
 
 public class UserRegistrationForm {
-	
-	@NotNull
+
+	@Email(message = "{user.reg.invalid.email}")
+	@NotNull(message = "{user.reg.no.email}")
+	@Size(min = 1, message = "{user.reg.no.email}")
 	private String userEmail;
-	
-	@NotNull
+
+	@NotNull(message = "{user.reg.no.pass}")
+	@Size(min = 1, message = "{user.reg.no.pass}")
 	private String userPassword;
-	
-	@NotNull
+
+	@NotNull(message = "{user.reg.no.pass}")
+	@Size(min = 1, message = "{user.reg.no.pass}")
 	private String userPasswordRepeat;
 
 	public String getUserEmail() {
@@ -36,6 +43,5 @@ public class UserRegistrationForm {
 	public void setUserPasswordRepeat(String userPasswordRepeat) {
 		this.userPasswordRepeat = userPasswordRepeat;
 	}
-	
-	
+
 }
