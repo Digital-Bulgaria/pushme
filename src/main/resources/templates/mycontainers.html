@@ -1,0 +1,70 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="/fragments/commonheader :: common_header(~{::title},~{})">
+
+	<title>PushMe - my containers</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+
+</head>
+<body>
+
+	<nav 
+		th:replace="/fragments/commonnavbar :: common_navbar('mycontainers')" 
+		class="navbar navbar-default">
+	</nav>
+
+	<div class="container-fluid">
+	
+		<!-- No containers -->
+    	<div th:if="${#lists.isEmpty(containers)}" class="row bottom-margin">
+    		<div class="col-md-8 col-md-offset-2">
+    			<div class="alert alert-success" role="alert">
+    				<p class="text-center">
+    					<i class="fa fa-info-circle fa-2x" aria-hidden="true"></i> 
+    				</p>
+    				<p class="text-center">
+    					Alas! It seems that you have no containers in your account... 
+    					If you want to create some, please navigate to the 
+    					<a th:href="@{/}" href="#">home page</a>.
+    				</p>
+    			</div>
+    		</div>
+    	</div>
+    	<!-- EO: no containers -->
+		
+		<!-- Containers list -->
+    	<div th:unless="${#lists.isEmpty(containers)}" class="row bottom-margin">
+    		<div class="col-md-8 col-md-offset-2">
+    			<table class="table">
+    				<thead>
+    					<tr>
+    						<th>#</th>
+    						<th>Container ID</th>
+    						<th>Actions</th>
+    					</tr>
+    				</thead>
+    				
+    				<tbody>
+    					<tr th:each="container, iterStat : ${containers}">
+    						<td th:text="${iterStat.count}">1</td>
+    						<td th:text="${container.id}"></td>
+    						<td>
+    							<!-- TODO -->
+								<a class="btn btn-success"><i class="fa fa-eye"></i> Inspect</a>
+								<a class="btn btn-info"><i class="fa fa-cogs"></i> Setup</a>
+								<a class="btn btn-danger"><i class="fa fa-times"></i> Delete</a>
+								<a >Link</a>
+    							
+    						</td>
+    					</tr>
+    				</tbody>
+    				
+    			</table>
+    		</div>
+    	</div>
+    	<!-- EO: Containers list -->
+		
+	</div>
+	
+</body>
+</html>

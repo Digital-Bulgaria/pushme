@@ -1,4 +1,4 @@
-package eu.balev.pushme.web;
+package eu.balev.pushme.web.container;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -15,6 +15,7 @@ import eu.balev.pushme.domain.Container;
 import eu.balev.pushme.domain.Request;
 import eu.balev.pushme.repository.ContainerRepository;
 import eu.balev.pushme.repository.RequestRepository;
+import eu.balev.pushme.web.RequestBuilder;
 
 @Controller
 public class ContainerController {

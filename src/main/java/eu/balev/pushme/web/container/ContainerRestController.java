@@ -1,4 +1,4 @@
-package eu.balev.pushme.web;
+package eu.balev.pushme.web.container;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
