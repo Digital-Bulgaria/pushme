@@ -28,7 +28,7 @@ public class ContainerController {
 	@Autowired
 	private RequestRepository requestRepo;
 
-	@RequestMapping(value = "/containers/{id}")
+	@RequestMapping(value = "/container/{id}")
 	public String pushInContainer(@PathVariable("id") String id,
 			HttpServletRequest httpRequest) {
 
@@ -50,14 +50,14 @@ public class ContainerController {
 		return "response";
 	}
 
-	@RequestMapping(value = "/containers-inspect", method = RequestMethod.GET)
+	@RequestMapping(value = "/container-inspect", method = RequestMethod.GET)
 	public ModelAndView inspectContainer(
 			@RequestParam(value = "id") String id) {
 
 		return processContainer("inspectcontainer", id);
 	}
 	
-	@RequestMapping(value = "/containers-setup", method = RequestMethod.GET)
+	@RequestMapping(value = "/container-setup", method = RequestMethod.GET)
 	public ModelAndView setupContainer(
 			@RequestParam(value = "id") String id,
 			@RequestParam(value = "newrule", required=false) String newrule) {

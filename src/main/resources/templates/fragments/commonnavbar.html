@@ -28,10 +28,19 @@
         			<li th:class="${active} == 'home' ? 'active'">
         				<a th:href="@{/}" href="#"><i class="fa fa-home" aria-hidden="true"></i> Home</a>
         			</li>
+        			<li sec:authorize="isAuthenticated()" th:class="${active} == 'mycontainers' ? 'active'">
+        				<a th:href="@{/mycontainers}" href="#"><i class="fa fa-user-o" aria-hidden="true"></i> My Containers</a>
+        			</li>
+        			
+        			
       			</ul>
       			
      
       			<ul class="nav navbar-nav navbar-right">
+      				
+      				<li sec:authorize="isAuthenticated()">
+      					<a>Howdy, <small sec:authentication="name">Bob</small>!</a>
+    				 </li>
       				
       				<li sec:authorize="isAuthenticated()">
     				 	<a href="#" class="log-out-link"><i class="fa fa-sign-out" aria-hidden="true"></i> Log out</a>

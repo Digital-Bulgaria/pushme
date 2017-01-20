@@ -1,8 +1,9 @@
 package eu.balev.pushme.web;
 
-import java.util.Optional;
-
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -11,7 +12,6 @@ import org.springframework.web.bind.annotation.RestController;
 import eu.balev.pushme.domain.Container;
 import eu.balev.pushme.domain.CurrentUser;
 import eu.balev.pushme.repository.ContainerRepository;
-import eu.balev.pushme.service.UserService;
 
 @RestController
 public class ContainerRestController {
@@ -19,16 +19,23 @@ public class ContainerRestController {
 	@Autowired
 	private ContainerRepository containerRepo;
 	
-	@Autowired
-	private UserService userService;
+	private static final Logger LOGGER = LoggerFactory
+			.getLogger(ContainerRestController.class);
 	
-	@RequestMapping(value = "/api/containers/container", method = RequestMethod.POST)
-	public @ResponseBody Container createContainer() {
+	@RequestMapping(value = "/api/container/container", method = RequestMethod.POST)
+	public @ResponseBody Container createContainer(@AuthenticationPrincipal CurrentUser currentUser) {
 		
 		Container ctnr = new Container();
 		
-		Optional<CurrentUser> currentUserOpt = userService.getCurrentUser();
-		currentUserOpt.ifPresent(currentUser -> ctnr.setUser(currentUser.getUser()));
+		if (currentUser != null)
+		{
+			LOGGER.debug("Creating a new container for authenticated user...");
+			ctnr.setUser(currentUser.getUser());
+		}
+		else
+		{
+			LOGGER.debug("Creating a new container for an anonymous user...");
+		}
 		
 		return containerRepo.save(ctnr);
 	}

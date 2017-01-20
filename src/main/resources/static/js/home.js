@@ -18,7 +18,7 @@ $(function() {
 		$.ajax({
 	        type: 'POST',
 	        contentType: 'application/json',
-	        url: '/api/containers/container',
+	        url: '/api/container/container',
 	        dataType: "json",
 	        beforeSend: function(xhr) {
 	            // csrf handling
