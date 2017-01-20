@@ -50,8 +50,8 @@
     						<td th:text="${container.id}"></td>
     						<td>
     							<!-- TODO -->
-								<a class="btn btn-success"><i class="fa fa-eye"></i> Inspect</a>
-								<a class="btn btn-info"><i class="fa fa-cogs"></i> Setup</a>
+								<a th:href="@{/container-inspect(id=${container.id})}" href="#" class="btn btn-success"><i class="fa fa-eye"></i> Inspect</a>
+								<a th:href="@{/container-setup(id=${container.id})}" href="#" class="btn btn-info"><i class="fa fa-cogs"></i> Setup</a>
 								<a class="btn btn-danger"><i class="fa fa-times"></i> Delete</a>
 								<a >Link</a>
     							
