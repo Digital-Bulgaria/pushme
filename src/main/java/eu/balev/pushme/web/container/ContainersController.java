@@ -19,35 +19,35 @@ public class ContainersController {
 
 	private static final Logger LOGGER = LoggerFactory
 			.getLogger(ContainersController.class);
-	
+
 	@Autowired
 	private ContainerRepository containerRepo;
-	
+
 	@GetMapping(value = "/mycontainers")
-	public ModelAndView createContainer(
+	public ModelAndView listContainers(
 			@AuthenticationPrincipal CurrentUser currentUser) {
-		
+
 		ModelAndView ret = new ModelAndView();
-		
-		if (currentUser == null)
+
+		if (currentUser == null) 
 		{
 			LOGGER.debug("My containers is requested for logged out user. "
 					+ "Perhaps the session has expired. Redirectring to the login page.");
 			ret.setViewName("login");
-		}
-		else
+		} 
+		else 
 		{
-			List<Container> containers = containerRepo.findByUser(currentUser.getUser());
-			
-			LOGGER.debug("My containers is requested for logged in user with ID={}. Number of retrieved containers is {}.",
-					currentUser.getUser().getId(),
-					containers.size());
+			List<Container> containers = containerRepo.findByUser(currentUser
+					.getUser());
+
+			LOGGER.debug(
+					"My containers is requested for logged in user with ID={}. Number of retrieved containers is {}.",
+					currentUser.getUser().getId(), containers.size());
 
 			ret.addObject("containers", containers);
 			ret.setViewName("mycontainers");
 		}
 
-		
 		return ret;
 	}
 }

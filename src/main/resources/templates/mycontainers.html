@@ -52,7 +52,7 @@
     							<!-- TODO -->
 								<a th:href="@{/container-inspect(id=${container.id})}" href="#" class="btn btn-success"><i class="fa fa-eye"></i> Inspect</a>
 								<a th:href="@{/container-setup(id=${container.id})}" href="#" class="btn btn-info"><i class="fa fa-cogs"></i> Setup</a>
-								<a class="btn btn-danger"><i class="fa fa-times"></i> Delete</a>
+								<a class="btn btn-danger" data-toggle="modal" data-target="#deleteCtnr"><i class="fa fa-times"></i> Delete</a>
 								<a >Link</a>
     							
     						</td>
@@ -65,6 +65,26 @@
     	<!-- EO: Containers list -->
 		
 	</div>
+	
+	<!-- Delete dialog -->
+	<div class="modal fade" id="deleteCtnr" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  		<div class="modal-dialog" role="document">
+    		<div class="modal-content">
+      			<div class="modal-header">
+        			<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        			<h4 class="modal-title" id="myModalLabel">Delete container</h4>
+      			</div>
+      			<div class="modal-body">
+        			Are you totally convinced that you have to delete this container?
+      			</div>
+      			<div class="modal-footer">
+        			<button type="button" class="btn btn-success" data-dismiss="modal">No</button>
+        			<button type="button" class="btn btn-danger">Yes</button>
+      			</div>
+    		</div>
+  		</div>
+	</div>
+	<!-- EO: Delete dialog -->
 	
 </body>
 </html>
