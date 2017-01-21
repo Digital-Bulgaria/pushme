@@ -1,9 +1,15 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
-<head th:replace="/fragments/commonheader :: common_header(~{::title},~{})">
+<head th:replace="/fragments/commonheader :: common_header(~{::title},~{::script})">
 
 	<title>PushMe - my containers</title>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	
+	<!-- Some JS executed on the main page -->
+	<script 
+		src="/js/mycontainers.js"
+		th:src="@{/js/mycontainers.js}">
+	</script>
 
 </head>
 <body>
@@ -52,7 +58,11 @@
     							<!-- TODO -->
 								<a th:href="@{/container-inspect(id=${container.id})}" href="#" class="btn btn-success"><i class="fa fa-eye"></i> Inspect</a>
 								<a th:href="@{/container-setup(id=${container.id})}" href="#" class="btn btn-info"><i class="fa fa-cogs"></i> Setup</a>
-								<a class="btn btn-danger" data-toggle="modal" data-target="#deleteCtnr"><i class="fa fa-times"></i> Delete</a>
+								<a th:attr="data-ctnr-id=${container.id}" 
+										class="delete-ctnr btn btn-danger" 
+										data-toggle="modal" 
+										data-target="#deleteCtnr">
+											<i class="fa fa-times"></i> Delete</a>
 								<a >Link</a>
     							
     						</td>
@@ -65,6 +75,11 @@
     	<!-- EO: Containers list -->
 		
 	</div>
+	
+	<!--/* CSRF deletion */-->
+  	<form id="delete-ctnr-form" th:action="@{/mycontainers-delete}" method="post">
+  		<input id="delete-ctnr-id" name="containerId" type="hidden" value=""/>
+  	</form>
 	
 	<!-- Delete dialog -->
 	<div class="modal fade" id="deleteCtnr" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
