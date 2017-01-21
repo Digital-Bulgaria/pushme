@@ -12,6 +12,9 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OrderBy;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 @Entity
 public class Container {
 
@@ -28,7 +31,8 @@ public class Container {
 	@OrderBy("sortOrder")
 	private List<Rule> rules;
 	
-	@ManyToOne(fetch = FetchType.LAZY, cascade=CascadeType.ALL)
+	@JsonIgnore
+	@ManyToOne(fetch = FetchType.LAZY)
 	private User user;
 	
 	public User getUser() {

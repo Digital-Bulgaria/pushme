@@ -8,6 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import eu.balev.pushme.domain.Container;
@@ -49,5 +51,22 @@ public class ContainersController {
 		}
 
 		return ret;
+	}
+	
+	//TODO: secure the delete
+	@PostMapping(value = "/mycontainers-delete")
+	public String deleteContainer(@RequestParam("containerId") String containerId)
+	{
+		LOGGER.debug("Received delete request for container with id {}.", containerId);
+		
+		Container ctnr = containerRepo.findOne(containerId);
+		if (ctnr == null)
+		{
+			LOGGER.debug("Unable to find container by id {}.", containerId);
+		}
+		
+		containerRepo.delete(ctnr);
+		
+		return "mycontainers";
 	}
 }

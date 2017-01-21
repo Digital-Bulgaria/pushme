@@ -4,4 +4,8 @@ $(function() {
 		var ctnrId = $(this).data('ctnr-id');
 		$('#delete-ctnr-id').val(ctnrId);
 	});
+	
+	$('#delete-ctnr-btn').click(function(){
+		$('#delete-ctnr-form').submit();
+	});
 })
