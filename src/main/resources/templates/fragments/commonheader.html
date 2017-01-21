@@ -31,6 +31,13 @@
 		th:src="@{/js/bootstrap/bootstrap.min.js}">
 	</script>
 	
+	<!-- Some JS executed on every page -->
+	<script 
+		src="/js/pushme.js"
+		th:src="@{/js/pushme.js}">
+	</script>
+	
+	
 	<th:block th:replace="${scripts}">
 	</th:block>
 
