@@ -1,8 +1,5 @@
-package eu.balev.pushme.service;
+package eu.balev.pushme.service.user;
 
-import java.util.Optional;
-
-import eu.balev.pushme.domain.CurrentUser;
 import eu.balev.pushme.domain.User;
 import eu.balev.pushme.web.user.UserRegistrationForm;
 
@@ -11,7 +8,12 @@ import eu.balev.pushme.web.user.UserRegistrationForm;
  */
 public interface UserService {
 	
+	/**
+	 * Creates a user based on the data submitted in the registration form.
+	 * 
+	 * @param regForm the registration form
+	 * 
+	 * @return the newly created user.
+	 */
 	User createUser(UserRegistrationForm regForm);
-	
-	Optional<CurrentUser> getCurrentUser();
 }

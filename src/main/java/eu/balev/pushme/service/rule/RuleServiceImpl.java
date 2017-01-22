@@ -1,4 +1,4 @@
-package eu.balev.pushme.service.impl;
+package eu.balev.pushme.service.rule;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -7,7 +7,6 @@ import eu.balev.pushme.domain.Container;
 import eu.balev.pushme.domain.Rule;
 import eu.balev.pushme.repository.ContainerRepository;
 import eu.balev.pushme.repository.RuleRepository;
-import eu.balev.pushme.service.RuleService;
 import eu.balev.pushme.web.RuleForm;
 
 @Service

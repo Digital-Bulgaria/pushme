@@ -67,6 +67,6 @@ public class ContainersController {
 		
 		containerRepo.delete(ctnr);
 		
-		return "mycontainers";
+		return "redirect:/mycontainers";
 	}
 }

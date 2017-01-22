@@ -19,7 +19,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.PostMapping;
 
-import eu.balev.pushme.service.UserService;
+import eu.balev.pushme.service.user.UserService;
 
 @Controller
 public class UserRegistrationController {

@@ -23,7 +23,7 @@ public class ContainerRestController {
 			.getLogger(ContainerRestController.class);
 	
 	@RequestMapping(value = "/api/container/container", method = RequestMethod.POST)
-	public @ResponseBody Container createContainer(@AuthenticationPrincipal CurrentUser currentUser) {
+	public @ResponseBody ContainerDTO createContainer(@AuthenticationPrincipal CurrentUser currentUser) {
 		
 		Container ctnr = new Container();
 		
@@ -37,8 +37,22 @@ public class ContainerRestController {
 			LOGGER.debug("Creating a new container for an anonymous user...");
 		}
 		
-		return containerRepo.save(ctnr);
+		Container newCtnr = containerRepo.save(ctnr);
+		
+		return new ContainerDTO(newCtnr.getId());
 	}
 	
+	static class ContainerDTO
+	{
+		private final String id;
+		
+		ContainerDTO(String id)
+		{
+			this.id = id;
+		}
+		public String getId() {
+			return id;
+		}
+	}
 	
 }

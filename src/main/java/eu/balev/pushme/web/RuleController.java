@@ -18,7 +18,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import eu.balev.pushme.service.RuleService;
+import eu.balev.pushme.service.rule.RuleService;
 
 @Controller
 public class RuleController {

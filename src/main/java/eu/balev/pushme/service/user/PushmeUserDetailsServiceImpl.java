@@ -1,4 +1,4 @@
-package eu.balev.pushme.service.impl;
+package eu.balev.pushme.service.user;
 
 import java.util.Optional;
 

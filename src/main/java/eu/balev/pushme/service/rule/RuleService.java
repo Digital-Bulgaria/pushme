@@ -1,4 +1,4 @@
-package eu.balev.pushme.service;
+package eu.balev.pushme.service.rule;
 
 import eu.balev.pushme.web.RuleForm;
 

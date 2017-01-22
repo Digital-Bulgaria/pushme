@@ -13,7 +13,6 @@ import javax.persistence.OneToMany;
 import javax.persistence.OrderBy;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity
 public class Container {
@@ -31,7 +30,6 @@ public class Container {
 	@OrderBy("sortOrder")
 	private List<Rule> rules;
 	
-	@JsonIgnore
 	@ManyToOne(fetch = FetchType.LAZY)
 	private User user;
 	
