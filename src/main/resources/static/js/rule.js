@@ -7,6 +7,16 @@ $(function() {
 			  attachFormListener();
 		});
 	});
+	
+	//sets the id of the rule to be deleted
+	$('.delete-rule').click(function() {
+		var ruleId = $(this).data('rule-id');
+		$('#delete-rule-id').val(ruleId);
+	});
+	
+	$('#delete-rule-btn').click(function(){
+		$('#delete-rule-form').submit();
+	});
 })
 
 function attachFormListener()

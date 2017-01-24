@@ -65,9 +65,10 @@ public class ContainersController {
 		{
 			LOGGER.debug("Unable to find container by id {}.", containerId);
 		}
-		
-		containerRepo.delete(ctnr);
-		
+		else
+		{
+			containerRepo.delete(ctnr);
+		}
 		return "redirect:/mycontainers";
 	}
 }
