@@ -21,7 +21,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import eu.balev.pushme.service.rule.RuleService;
 
 @Controller
-public class RuleController {
+public class RulesController {
 
 	@Autowired
 	private RuleService ruleService;

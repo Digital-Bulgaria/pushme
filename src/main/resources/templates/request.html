@@ -11,9 +11,16 @@
     					<div>
     						<h4>Parameters</h4>
     					</div>
-    					<div th:each="parameter : ${request.parameters}">
-    						<strong th:text="${parameter.name} + ':'">name</strong> <span th:text="${parameter.value}">value</span>
+    					<div th:unless="${#lists.isEmpty(request.parameters)}">
+    						<div th:each="parameter : ${request.parameters}">
+    							<strong th:text="${parameter.name} + ':'">name</strong> <span th:text="${parameter.value}">value</span>
+    						</div>
     					</div>
+    					
+    					<div th:if="${#lists.isEmpty(request.parameters)}">
+    						<h5>Not available</h5>
+    					</div>
+    					
   					</div>
 				</div>	
 				<!--/* EO: The params */-->

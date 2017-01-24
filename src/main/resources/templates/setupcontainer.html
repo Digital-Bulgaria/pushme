@@ -30,7 +30,7 @@
     					<i class="fa fa-check fa-2x" aria-hidden="true"></i> 
     				</p>
     				<p class="text-center">
-    					You have successfully created a new rule for your container
+    					You have successfully created a new rule for your container.
     				</p>
     			</div>
     		</div>
@@ -106,7 +106,13 @@
     					<tr th:each="rule, iterStat : ${container.rules}">
     						<td th:text="${iterStat.count}">1</td>
     						<td th:text="${rule.requestMethod} + ' | ' + ${rule.responseCode}"></td>
-    						<td></td>
+    						<td>
+    							<a th:attr="data-rule-id=${rule.id}" 
+										class="delete-rule btn btn-danger" 
+										data-toggle="modal" 
+										data-target="#deleteRule">
+											<i class="fa fa-times"></i> Delete</a>
+    						</td>
     					</tr>
     				</tbody>
     				
@@ -115,6 +121,32 @@
     	</div>
     	<!-- EO: Rule list -->
     	
-    </div>	
+    </div>
+    
+    <!--/* CSRF deletion */-->
+  	<form id="delete-rule-form" th:action="@{/rules-delete}" method="post">
+  		<input id="delete-rule-id" name="ruleId" type="hidden" value=""/>
+  	</form>
+	
+	<!-- Delete dialog -->
+	<div class="modal fade" id="deleteRule" tabindex="-1" role="dialog">
+  		<div class="modal-dialog" role="document">
+    		<div class="modal-content">
+      			<div class="modal-header">
+        			<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        			<h4 class="modal-title" id="myModalLabel">Delete rule</h4>
+      			</div>
+      			<div class="modal-body">
+        			Are you totally convinced that you have to delete this rule?
+      			</div>
+      			<div class="modal-footer">
+        			<button type="button" class="btn btn-success" data-dismiss="modal">No</button>
+        			<button id="delete-rule-btn" type="button" class="btn btn-danger">Yes</button>
+      			</div>
+    		</div>
+  		</div>
+	</div>
+	<!-- EO: Delete dialog -->
+    	
 </body>
 </html>
