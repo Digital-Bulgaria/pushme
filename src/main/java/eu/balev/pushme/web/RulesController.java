@@ -22,11 +22,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import eu.balev.pushme.domain.Container;
 import eu.balev.pushme.domain.Rule;
 import eu.balev.pushme.repository.RuleRepository;
 import eu.balev.pushme.service.rule.RuleService;
-import eu.balev.pushme.web.container.ContainersController;
 
 @Controller
 public class RulesController {
@@ -90,13 +88,15 @@ public class RulesController {
 		return "rulecreated";
 	}
 	
-	//TODO: Check permissions
-	//@PreAuthorize("@CurrentUserService.canAccessContainer(principal, #containerId)")
+	
+	@PreAuthorize("@CurrentUserService.canAccessRule(principal, #ruleId)")
 	@PostMapping(value = "/rules-delete")
 	public String deleteContainer(@RequestParam("ruleId") Long ruleId,
 			RedirectAttributes redirAttribs)
 	{
 		LOGGER.debug("Received delete request for rule with id {}.", ruleId);
+		
+		//if extra security is required for anonymous containers we may include cntr id here
 		
 		Rule rule = ruleRepo.findOne(ruleId);
 		if (rule == null)
