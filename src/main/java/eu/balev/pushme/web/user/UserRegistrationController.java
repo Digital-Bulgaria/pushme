@@ -6,6 +6,7 @@ import javax.validation.Valid;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -35,6 +36,9 @@ public class UserRegistrationController {
 	
 	@Autowired
     protected AuthenticationManager authenticationManager;
+	
+	@Value("${pushme.recaptcha.sitekey:#{null}}")
+	private String recaptchaSiteKey;
 
 	@InitBinder
 	public void initBinder(WebDataBinder binder) {
@@ -43,10 +47,16 @@ public class UserRegistrationController {
 
 	@GetMapping(value = "/register")
 	public String register(
-			UserRegistrationForm userRegistrationForm) {
+			UserRegistrationForm userRegistrationForm,
+			Model model) {
 
 		LOGGER.debug("Serving a fresh registration page");
 
+		if (recaptchaSiteKey != null)
+		{
+			model.addAttribute("recaptchaSiteKey", recaptchaSiteKey);
+		}
+		
 		return "register";
 	}
 
