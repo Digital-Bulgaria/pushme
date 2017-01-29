@@ -12,8 +12,6 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OrderBy;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
 @Entity
 public class Container {
 

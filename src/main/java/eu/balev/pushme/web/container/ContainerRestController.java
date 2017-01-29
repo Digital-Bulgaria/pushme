@@ -1,5 +1,7 @@
 package eu.balev.pushme.web.container;
 
+import java.util.Optional;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,35 +13,32 @@ import org.springframework.web.bind.annotation.RestController;
 
 import eu.balev.pushme.domain.Container;
 import eu.balev.pushme.domain.CurrentUser;
+import eu.balev.pushme.domain.User;
 import eu.balev.pushme.repository.ContainerRepository;
+import eu.balev.pushme.service.container.ContainerService;
 
 @RestController
 public class ContainerRestController {
 
 	@Autowired
-	private ContainerRepository containerRepo;
-	
-	private static final Logger LOGGER = LoggerFactory
-			.getLogger(ContainerRestController.class);
+	private ContainerService containerService;
 	
 	@RequestMapping(value = "/api/container/container", method = RequestMethod.POST)
 	public @ResponseBody ContainerDTO createContainer(@AuthenticationPrincipal CurrentUser currentUser) {
 		
-		Container ctnr = new Container();
+		Optional<User> ownerOpt = Optional.ofNullable(currentUser).map(CurrentUser::getUser);
 		
-		if (currentUser != null)
+		String ctnrId;
+		if (!ownerOpt.isPresent())
 		{
-			LOGGER.debug("Creating a new container for authenticated user...");
-			ctnr.setUser(currentUser.getUser());
+			ctnrId= containerService.createContainer();
 		}
 		else
 		{
-			LOGGER.debug("Creating a new container for an anonymous user...");
+			ctnrId= containerService.createContainer(ownerOpt.get());
 		}
 		
-		Container newCtnr = containerRepo.save(ctnr);
-		
-		return new ContainerDTO(newCtnr.getId());
+		return new ContainerDTO(ctnrId);
 	}
 	
 	static class ContainerDTO

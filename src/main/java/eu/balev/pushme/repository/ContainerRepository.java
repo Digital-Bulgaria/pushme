@@ -13,4 +13,5 @@ public interface ContainerRepository extends CrudRepository<Container, String> {
 	
 	List<Container> findByUser(User user);
 	
+	Long countByUser(User user);
 }
