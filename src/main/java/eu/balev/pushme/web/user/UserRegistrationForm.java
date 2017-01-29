@@ -19,6 +19,8 @@ public class UserRegistrationForm {
 	@NotNull(message = "{user.reg.no.pass}")
 	@Size(min = 1, message = "{user.reg.no.pass}")
 	private String userPasswordRepeat;
+	
+	private String recaptchaResponse;
 
 	public String getUserEmail() {
 		return userEmail;
@@ -44,4 +46,11 @@ public class UserRegistrationForm {
 		this.userPasswordRepeat = userPasswordRepeat;
 	}
 
+	public String getRecaptchaResponse() {
+		return recaptchaResponse;
+	}
+
+	public void setRecaptchaResponse(String recaptchaResponse) {
+		this.recaptchaResponse = recaptchaResponse;
+	}
 }

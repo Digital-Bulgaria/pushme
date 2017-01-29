@@ -62,9 +62,10 @@ public class UserRegistrationController {
 
 	@PostMapping(value = "/register-create")
 	public String createRule(@Valid UserRegistrationForm userRegistrationForm,
-			BindingResult bindingResult, Model model,
+			BindingResult bindingResult, 
+			Model model,
 			HttpServletRequest request) {
-
+		
 		if (bindingResult.hasErrors()) {
 			return "register";
 		}
