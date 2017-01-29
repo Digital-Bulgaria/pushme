@@ -18,6 +18,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.InitBinder;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import eu.balev.pushme.service.user.UserService;
@@ -90,4 +91,9 @@ public class UserRegistrationController {
 
         SecurityContextHolder.getContext().setAuthentication(authenticatedUser);
     }
+	
+	@ModelAttribute("recaptchaSiteKey")
+	public String getRecaptchaSiteKey(){
+	    return recaptchaSiteKey;
+	}
 }

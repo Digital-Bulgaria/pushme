@@ -109,6 +109,16 @@
                             
                             <!-- EO: Pass retry -->
                             
+                            <hr/>
+                            
+                            <div 
+  								th:if="${#fields.hasErrors('recaptchaResponse')}"
+  								th:errors="*{recaptchaResponse}"
+  								class="alert alert-danger" role="alert">
+  								<i class="fa fa-exclamation-circle" aria-hidden="true"></i>
+  								reCAPTCHA is not solved.
+							</div> 
+                            
                             <!-- reCAPTCHA -->
                             <div th:if="${recaptchaSiteKey}" class="bottom-margin input-group">
                             	<div class="g-recaptcha" th:attr="data-sitekey=${recaptchaSiteKey}"></div>
