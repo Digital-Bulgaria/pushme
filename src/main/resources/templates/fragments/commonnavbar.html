@@ -38,7 +38,7 @@
      
       			<ul class="nav navbar-nav navbar-right">
       				
-      				<li sec:authorize="isAuthenticated()">
+      				<li class="hidden-xs" sec:authorize="isAuthenticated()">
       					<a>Howdy, <small sec:authentication="name">Bob</small>!</a>
     				 </li>
       				

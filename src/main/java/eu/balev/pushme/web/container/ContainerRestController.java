@@ -2,8 +2,6 @@ package eu.balev.pushme.web.container;
 
 import java.util.Optional;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -11,10 +9,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import eu.balev.pushme.domain.Container;
 import eu.balev.pushme.domain.CurrentUser;
 import eu.balev.pushme.domain.User;
-import eu.balev.pushme.repository.ContainerRepository;
 import eu.balev.pushme.service.container.ContainerService;
 
 @RestController
