@@ -75,7 +75,7 @@ public class UserRegistrationController {
 		
 		authenticateUserAndSetSession(userRegistrationForm.getUserEmail(), userRegistrationForm.getUserPassword(), request);
 		
-		return "index";
+		return "redirect:/home";
 	}
 	
 	private void authenticateUserAndSetSession(String uName, String uPassword, HttpServletRequest request) {
