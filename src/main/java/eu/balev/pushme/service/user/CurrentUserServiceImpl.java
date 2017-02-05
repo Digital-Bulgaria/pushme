@@ -99,6 +99,6 @@ public class CurrentUserServiceImpl implements CurrentUserService {
 	
 	@Override
 	public boolean canAccessRule(String principal, Long ruleId) {
-		return true;
+		return canAccessRule((CurrentUser)null, ruleId);
 	}
 }
