@@ -20,6 +20,7 @@ public interface CurrentUserService {
 	 *         given id.
 	 */
 	public boolean canAccessContainer(CurrentUser user, String containerId);
+	
 
 	/**
 	 * Checks if the user can access the rule with the given id.
@@ -33,4 +34,6 @@ public interface CurrentUserService {
 	 *         id.
 	 */
 	public boolean canAccessRule(CurrentUser currentUser, Long ruleId);
+	
+	public boolean canAccessRule(String principal, Long ruleId);
 }

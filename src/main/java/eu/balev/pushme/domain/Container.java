@@ -1,5 +1,6 @@
 package eu.balev.pushme.domain;
 
+import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 import java.util.UUID;
@@ -62,7 +63,7 @@ public class Container {
 
 	//requests
 	public List<Request> getRequests() {
-		return requests;
+		return requests == null ? Collections.emptyList() : requests;
 	}
 
 	public void setRequests(List<Request> requests) {
@@ -75,7 +76,7 @@ public class Container {
 	
 	//rules
 	public List<Rule> getRules() {
-		return rules;
+		return rules == null ? Collections.emptyList() : rules;
 	}
 
 	public void setRules(List<Rule> rules) {

@@ -4,6 +4,7 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -13,15 +14,13 @@ import org.springframework.web.servlet.ModelAndView;
 
 import eu.balev.pushme.domain.Container;
 import eu.balev.pushme.domain.Request;
+import eu.balev.pushme.domain.Rule;
 import eu.balev.pushme.repository.ContainerRepository;
 import eu.balev.pushme.repository.RequestRepository;
 import eu.balev.pushme.web.RequestBuilder;
 
 @Controller
 public class ContainerController {
-
-	// todo - check container existance
-	// todo - clean up container
 
 	@Autowired
 	private ContainerRepository containerRepo;
@@ -30,7 +29,7 @@ public class ContainerController {
 	private RequestRepository requestRepo;
 
 	@RequestMapping(value = "/container/{id}")
-	public String pushInContainer(@PathVariable("id") String id,
+	public ResponseEntity<String> pushInContainer(@PathVariable("id") String id,
 			HttpServletRequest httpRequest) {
 
 		Container container = containerRepo.findOne(id);
@@ -48,7 +47,31 @@ public class ContainerController {
 
 		requestRepo.save(pushMeReq);
 
-		return "response";
+		Rule rule = 
+				container.getRules().stream().
+				filter(
+						r -> 
+						(
+								httpRequest.getMethod().equals(r.getRequestMethod()) || 
+								"ALL".equals(r.getRequestMethod())
+						)
+					).
+				findFirst().orElse(getDefaultRule());
+
+		
+		ResponseEntity<String> response = new ResponseEntity<>(
+				rule.getResponseBody(), 
+				HttpStatus.valueOf(rule.getResponseCode()));
+		
+		return response;
+	}
+	
+	private Rule getDefaultRule()
+	{
+		Rule rule = new Rule();
+		rule.setResponseCode(HttpStatus.OK.value());
+		rule.setResponseBody("OK");
+		return rule;
 	}
 
 	@RequestMapping(value = "/container-inspect", method = RequestMethod.GET)

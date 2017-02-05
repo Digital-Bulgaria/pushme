@@ -96,4 +96,9 @@ public class CurrentUserServiceImpl implements CurrentUserService {
 
 		return canAccessContainer(currentUser, ctnr);
 	}
+	
+	@Override
+	public boolean canAccessRule(String principal, Long ruleId) {
+		return true;
+	}
 }
