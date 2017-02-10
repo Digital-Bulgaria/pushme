@@ -47,17 +47,7 @@ public class ContainerController {
 
 		requestRepo.save(pushMeReq);
 
-		Rule rule = 
-				container.getRules().stream().
-				filter(
-						r -> 
-						(
-								httpRequest.getMethod().equals(r.getRequestMethod()) || 
-								"ALL".equals(r.getRequestMethod())
-						)
-					).
-				findFirst().orElse(getDefaultRule());
-
+		Rule rule = container.getBestRule(pushMeReq);
 		
 		ResponseEntity<String> response = new ResponseEntity<>(
 				rule.getResponseBody(), 
@@ -66,13 +56,7 @@ public class ContainerController {
 		return response;
 	}
 	
-	private Rule getDefaultRule()
-	{
-		Rule rule = new Rule();
-		rule.setResponseCode(HttpStatus.OK.value());
-		rule.setResponseBody("OK");
-		return rule;
-	}
+	
 
 	@RequestMapping(value = "/container-inspect", method = RequestMethod.GET)
 	public ModelAndView inspectContainer(

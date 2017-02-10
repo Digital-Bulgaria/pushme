@@ -5,3 +5,4 @@ bin
 .settings
 build/
 application-dev.properties
+todo.txt
