@@ -2,6 +2,7 @@ package eu.balev.pushme.domain;
 
 import java.util.Collections;
 import java.util.Date;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Objects;
 import java.util.UUID;
@@ -19,6 +20,8 @@ import javax.persistence.PrePersist;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -29,12 +32,12 @@ public class Container {
 	@Id
 	private String id;
 
-	@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval=true)
 	@JoinColumn(name = "container_id")
 	@OrderBy("dateCreated DESC")
 	private List<Request> requests;
 
-	@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval=true)
 	@JoinColumn(name = "container_id")
 	@OrderBy("sortOrder")
 	private List<Rule> rules;
@@ -45,6 +48,9 @@ public class Container {
 	@Column(updatable = false)
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date dateCreated;
+	
+	private static final Logger LOGGER = LoggerFactory
+			.getLogger(Container.class);
 
 	public User getUser() {
 		return user;
@@ -66,6 +72,16 @@ public class Container {
 		return id;
 	}
 
+	public void addRequest(Request request)
+	{
+		request.setContainer(this);
+		if (requests == null)
+		{
+			requests = new LinkedList<>();
+		}
+		requests.add(0, request);
+	}
+	
 	// requests
 	public List<Request> getRequests() {
 		return requests == null ? Collections.emptyList() : requests;
@@ -77,6 +93,26 @@ public class Container {
 
 	public int getRequestsCount() {
 		return requests != null ? requests.size() : 0;
+	}
+	
+	@JsonIgnore
+	public boolean pruneRequests(int maxRequestsInCntr){
+		
+		boolean ret = false;
+		int currentCnt = getRequestsCount();
+		if (currentCnt > maxRequestsInCntr)
+		{
+			requests.subList(maxRequestsInCntr, currentCnt).clear();
+			ret = true;
+		}
+	
+		LOGGER.debug("Requested prune of requests in container {}. Max Allowed {}. Current {}. Prune performed = {}.", 
+				getId(),
+				maxRequestsInCntr, 
+				currentCnt,
+				ret);
+		
+		return ret;
 	}
 
 	// rules

@@ -16,37 +16,32 @@ import eu.balev.pushme.domain.Container;
 import eu.balev.pushme.domain.Request;
 import eu.balev.pushme.domain.Rule;
 import eu.balev.pushme.repository.ContainerRepository;
-import eu.balev.pushme.repository.RequestRepository;
-import eu.balev.pushme.web.RequestBuilder;
+import eu.balev.pushme.service.container.ContainerService;
+import eu.balev.pushme.service.request.RequestService;
 
 @Controller
 public class ContainerController {
 
 	@Autowired
-	private ContainerRepository containerRepo;
-
+	private ContainerService containerService;
+	
+	@Autowired 
+	private RequestService requestService;
+	
 	@Autowired
-	private RequestRepository requestRepo;
+	private ContainerRepository containerRepo;
 
 	@RequestMapping(value = "/container/{id}")
 	public ResponseEntity<String> pushInContainer(@PathVariable("id") String id,
 			HttpServletRequest httpRequest) {
-
+		
+		//get the container
 		Container container = containerRepo.findOne(id);
-
-		RequestBuilder pushMeReqBuilder = new RequestBuilder(httpRequest);
-
-		Request pushMeReq = pushMeReqBuilder.
-				buildHeaders().
-				buildParameters().
-				buildGeneralProps().
-				buildRequestFrom().
-				build();
-
-		pushMeReq.setContainer(container);
-
-		requestRepo.save(pushMeReq);
-
+		
+		Request pushMeReq = requestService.mapRequest(httpRequest);
+		
+		containerService.storeRequest(container, pushMeReq);
+		
 		Rule rule = container.getBestRule(pushMeReq);
 		
 		ResponseEntity<String> response = new ResponseEntity<>(
@@ -55,8 +50,6 @@ public class ContainerController {
 		
 		return response;
 	}
-	
-	
 
 	@RequestMapping(value = "/container-inspect", method = RequestMethod.GET)
 	public ModelAndView inspectContainer(
