@@ -1,3 +1,8 @@
+function reloadStatus() {
+	$("#containerstat").load( "/mycontainers-status");
+}
+
+
 $(function() {
 	
 	//toggles learn more/less
@@ -48,4 +53,6 @@ $(function() {
 	    });
 		
 	});
+	
+	reloadStatus();
 })

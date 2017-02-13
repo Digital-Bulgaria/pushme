@@ -1,0 +1,23 @@
+<!-- Warn for anonymous users -->
+<div
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4"
+	sec:authorize="!isAuthenticated()" class="row bottom-margin">
+	
+	<div class="col-md-6 col-md-offset-3">
+		<div class="alert alert-warning" role="alert">
+			<p class="text-center">
+				<i class="fa fa-warning fa-2x" aria-hidden="true"></i>
+			</p>
+			<p class="text-center">
+				You are currently not logged in. You still can create a container
+				anonymously but anonymous containers have serious limitations. <a
+					href="#">More...</a> We strongly recommend that you <a
+					th:href="@{/login}" href="#">login</a> or <a th:href="@{/register}">register</a>.
+			</p>
+
+		</div>
+	</div>
+	
+</div>
+<!-- EO: Anonymous users. -->

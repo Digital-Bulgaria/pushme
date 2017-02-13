@@ -126,48 +126,13 @@
     	
     	<!-- EO: Steps -->
     	
-    	<!-- Warn for anonymous users -->
-    	<div sec:authorize="!isAuthenticated()" class="row bottom-margin">
-    		<div class="col-md-6 col-md-offset-3">
-    			<div class="alert alert-warning" role="alert">
-    				<p class="text-center">
-    					<i class="fa fa-warning fa-2x" aria-hidden="true"></i> 
-    				</p>
-    				<p class="text-center">
-    					You are currently not logged in. You still can create a container anonymously
-    					but anonymous containers have serious limitations. <a href="#">More...</a>
-    					We strongly recommend that you 
-    					<a th:href="@{/login}" href="#">login</a> or <a th:href="@{/register}">register</a>.
-        			</p>
-    				
-    			</div>
-    		</div>
+    	<!-- Spinner, container stat -->
+    	<div class="row bottom-margin">
+   			<div id="containerstat" class="text-center">
+   				<i class="fa fa-cog fa-spin fa-4x fa-fw"></i>
+   			</div>
     	</div>
-    	<!-- EO: Anonymous users. -->
-    	
-    	<!-- info for logger in users -->
-    	<div sec:authorize="isAuthenticated()" class="row bottom-margin">
-    		<div class="col-md-6 col-md-offset-3">
-    			<div class="alert alert-success" role="alert">
-    				<p class="text-center">
-    					<i class="fa fa-info-circle fa-2x" aria-hidden="true"></i> 
-    				</p>
-    				<p th:if="${ctnrCnt} gt 0" class="text-center">
-    					Currently you have <span th:text="${ctnrCnt}"></span> container(s).
-    					You may manage them <a th:href="@{/mycontainers}" href="#">here</a>.
-    					<span th:if="${maxReached}">
-    						<strong>BUT!</strong> You have reached the maximum number of containers that you can mantain in your account.
-    						If you want to create a new one, you should <a th:href="@{/mycontainers}" href="#">delete</a> 
-    						one of your existing containers.
-    					</span>
-        			</p>
-    				<p th:if="${ctnrCnt} eq 0" class="text-center">
-    					Currently you have no containers. You may start by creating one. Do it and enjoy!
-    				</p>
-    			</div>
-    		</div>
-    	</div>
-    	<!-- EO: logged in users -->
+    	<!-- EO: Spinner, container stat -->
     	
     	<!-- Create a container -->
 		<div th:unless="${maxReached}" class="row bottom-margin">
