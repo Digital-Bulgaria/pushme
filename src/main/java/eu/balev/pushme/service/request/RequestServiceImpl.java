@@ -5,7 +5,6 @@ import javax.servlet.http.HttpServletRequest;
 import org.springframework.stereotype.Service;
 
 import eu.balev.pushme.domain.Request;
-import eu.balev.pushme.web.RequestBuilder;
 
 @Service
 public class RequestServiceImpl implements RequestService {
@@ -15,8 +14,12 @@ public class RequestServiceImpl implements RequestService {
 		
 		RequestBuilder pushMeReqBuilder = new RequestBuilder(httpRequest);
 
-		Request pushMeReq = pushMeReqBuilder.buildHeaders().buildParameters()
-				.buildGeneralProps().buildRequestFrom().build();
+		Request pushMeReq = pushMeReqBuilder.
+				buildHeaders().
+				buildParameters().
+				buildGeneralProps().
+				buildRequestFrom().
+				build();
 
 		return pushMeReq;
 	}

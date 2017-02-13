@@ -1,4 +1,4 @@
-package eu.balev.pushme.web;
+package eu.balev.pushme.service.request;
 
 import java.util.Enumeration;
 import java.util.LinkedList;
