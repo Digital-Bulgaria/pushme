@@ -1,5 +1,8 @@
 function reloadStatus() {
-	$("#containerstat").load( "/mycontainers-status");
+	$("#containerstat_loader").show();
+	$("#containerstat").load( "/mycontainers-status", function() {
+		$("#containerstat_loader").hide();
+	});
 }
 
 
@@ -45,6 +48,7 @@ $(function() {
 	        		);
 	        	
 	        	$( "#success_message" ).slideToggle( "slow");
+	        	reloadStatus();
 	        	
 	        },
 	        error: function(jqXHR, textStatus, errorThrown){
