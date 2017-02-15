@@ -33,6 +33,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 					logoutSuccessUrl("/home")
 				.permitAll();
 		
+		http.csrf().ignoringAntMatchers("/container/**");
+		
 		//TODO: should be changed on released vers.
 		http.csrf().ignoringAntMatchers("/h2-console/**");
 		http.headers().frameOptions().disable();
