@@ -72,7 +72,16 @@
 		    				id="btn_create_rule" 
 		    				th:attr="data-ctnr-id=${container.id}"
     						class="btn btn-lg btn-success">
-    						<span id="btn_create_container_new"><i class="fa fa-plus fa-lg"></i> New rule</span>
+    						<span id="btn_create_container_new"><i id="btn_create_rule_icon" class="fa fa-plus fa-lg"></i> New rule</span>
+    					</button>
+    					
+    					<button 
+		    				id="btn_rename_ctnr" 
+		    				th:attr="data-ctnr-id=${container.id}"
+    						class="btn btn-lg btn-success"
+    						data-toggle="modal" 
+							data-target="#renameContainer">
+    						<span><i id="btn_rename_ctnr_icon" class="fa fa-pencil fa-lg"></i> Rename</span>
     					</button>
  				</div>
     			
@@ -142,6 +151,26 @@
       			<div class="modal-footer">
         			<button type="button" class="btn btn-success" data-dismiss="modal">No</button>
         			<button id="delete-rule-btn" type="button" class="btn btn-danger">Yes</button>
+      			</div>
+    		</div>
+  		</div>
+	</div>
+	<!-- EO: Delete dialog -->
+	
+	<!-- Delete dialog -->
+	<div class="modal fade" id="renameContainer" tabindex="-1" role="dialog">
+  		<div class="modal-dialog" role="document">
+    		<div class="modal-content">
+      			<div class="modal-header">
+        			<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        			<h4 class="modal-title" id="myModalLabel">Rename container</h4>
+      			</div>
+      			<div class="modal-body">
+        			Not yet implemented
+      			</div>
+      			<div class="modal-footer">
+        			<button type="button" class="btn btn-success" data-dismiss="modal">Cancel</button>
+        			<button type="button" id="save-cntr-name" class="btn btn-success">OK</button>
       			</div>
     		</div>
   		</div>

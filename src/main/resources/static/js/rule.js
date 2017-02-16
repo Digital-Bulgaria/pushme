@@ -1,11 +1,23 @@
 $(function() {
 	$("#btn_create_rule").click(function() {
 		
-		//todo - fix relative path!
-		var ctnrid = $(this).data("ctnr-id");
-		$("#new_rule").load("/rules-new?containerid=" + ctnrid, function() {
-			  attachFormListener();
-		});
+		var emptyForm = $("#new_rule").children().length == 0;
+		
+		if (emptyForm)
+		{
+			//todo - fix relative path!
+			var ctnrid = $(this).data("ctnr-id");
+			$("#new_rule").load("/rules-new?containerid=" + ctnrid, function() {
+				attachFormListener();
+			});
+		}
+		else
+		{
+			//
+			$("#new_rule").slideToggle("fast");
+		}
+		
+		$("#btn_create_rule_icon").toggleClass("fa-minus fa-plus");
 	});
 	
 	//sets the id of the rule to be deleted
@@ -38,6 +50,7 @@ function attachFormListener()
 				attachFormListener();//careful!
 		}).fail(function(data) {
 			$("#new_rule").html(data);
+			attachFormListener();
 		});
 	});
 }

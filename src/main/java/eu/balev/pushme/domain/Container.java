@@ -29,8 +29,13 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 @Entity
 public class Container {
 
+	private static final Logger LOGGER = LoggerFactory
+			.getLogger(Container.class);
+	
 	@Id
 	private String id;
+	
+	private String name;
 
 	@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval=true)
 	@JoinColumn(name = "container_id")
@@ -49,9 +54,15 @@ public class Container {
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date dateCreated;
 	
-	private static final Logger LOGGER = LoggerFactory
-			.getLogger(Container.class);
-
+	public Container() {
+		id = UUID.randomUUID().toString();
+		name = id;
+	}
+	
+	public Container(String id) {
+		this.id = id;
+	}
+	
 	public User getUser() {
 		return user;
 	}
@@ -60,16 +71,16 @@ public class Container {
 		this.user = user;
 	}
 
-	public Container() {
-		id = UUID.randomUUID().toString();
-	}
-
-	public Container(String id) {
-		this.id = id;
-	}
-
 	public String getId() {
 		return id;
+	}
+	
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
 	}
 
 	public void addRequest(Request request)
