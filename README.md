@@ -1,3 +1,3 @@
-A developer tool and educational project for receiving and inspecting webhooks. Currently in early development.
+# Welcome to PushMe!
 
-Technologies: Spring Boot, Spring Data, Spring Security, Thymeleaf, HTML/CSS/jQuery.
+PushMe is a developer tool for capturing and inspecting webhooks. For more details feel welcome to check our [wiki](https://github.com/luchob/pushme/wiki).
