@@ -10,7 +10,7 @@
 				<i class="fa fa-info-circle fa-2x" aria-hidden="true"></i>
 			</p>
 			<p th:if="${ctnrCnt} gt 0" class="text-center">
-				Currently you have <span th:text="${ctnrCnt}"></span> container(s).
+				Currently you have <span th:text="${ctnrCnt}">10</span> container(s).
 				You may manage them <a th:href="@{/mycontainers}" href="#">here</a>.
 				<span th:if="${maxReached}"> <strong>BUT!</strong> You have
 					reached the maximum number of containers that you can mantain in

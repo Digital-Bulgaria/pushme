@@ -25,48 +25,37 @@ public class ContainersController {
 
 	@Autowired
 	private ContainerRepository containerRepo;
-	
+
 	@GetMapping(value = "/mycontainers")
 	public ModelAndView listContainers(
 			@AuthenticationPrincipal CurrentUser currentUser) {
 
 		ModelAndView ret = new ModelAndView();
 
-		if (currentUser == null) 
-		{
-			LOGGER.debug("My containers is requested for logged out user. "
-					+ "Perhaps the session has expired. Redirectring to the login page.");
-			ret.setViewName("login");
-		} 
-		else 
-		{
-			List<Container> containers = containerRepo.findByUser(currentUser
-					.getUser());
+		List<Container> containers = containerRepo.findByUser(currentUser
+				.getUser());
 
-			LOGGER.debug(
-					"My containers is requested for logged in user with ID={}. Number of retrieved containers is {}.",
-					currentUser.getUser().getId(), containers.size());
+		LOGGER.debug(
+				"My containers is requested for logged in user with ID={}. Number of retrieved containers is {}.",
+				currentUser.getUser().getId(), containers.size());
 
-			ret.addObject("containers", containers);
-			ret.setViewName("mycontainers");
-		}
+		ret.addObject("containers", containers);
+		ret.setViewName("mycontainers");
 
 		return ret;
 	}
-	
+
 	@PreAuthorize("@CurrentUserService.canAccessContainer(principal, #containerId)")
 	@PostMapping(value = "/mycontainers-delete")
-	public String deleteContainer(@RequestParam("containerId") String containerId)
-	{
-		LOGGER.debug("Received delete request for container with id {}.", containerId);
-		
+	public String deleteContainer(
+			@RequestParam("containerId") String containerId) {
+		LOGGER.debug("Received delete request for container with id {}.",
+				containerId);
+
 		Container ctnr = containerRepo.findOne(containerId);
-		if (ctnr == null)
-		{
+		if (ctnr == null) {
 			LOGGER.debug("Unable to find container by id {}.", containerId);
-		}
-		else
-		{
+		} else {
 			containerRepo.delete(ctnr);
 		}
 		return "redirect:/mycontainers";
