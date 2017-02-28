@@ -45,7 +45,7 @@
     				<thead>
     					<tr>
     						<th>#</th>
-    						<th>Container ID</th>
+    						<th>Container Name</th>
     						<th>Actions</th>
     					</tr>
     				</thead>
@@ -53,7 +53,7 @@
     				<tbody>
     					<tr th:each="container, iterStat : ${containers}">
     						<td th:text="${iterStat.count}">1</td>
-    						<td th:text="${container.id}">ContainerID</td>
+    						<td th:text="${container.name}">Container Name</td>
     						<td>
     							<!-- TODO -->
 								<a th:href="@{/container-inspect(id=${container.id})}" href="#" class="btn btn-success"><i class="fa fa-eye"></i> <span class="hidden-xs">Inspect</span></a>

@@ -21,6 +21,15 @@
     
     <div class="container-fluid">
     
+    	<!-- Breadcrumb -->
+    	<div class="col-md-8 col-md-offset-2">
+    		<ol class="breadcrumb">
+  				<li class="breadcrumb-item"><a th:href="@{/mycontainers}" href="#">My Containers</a></li>
+  				<li class="breadcrumb-item active" th:text="${container.name}">Container name</li>
+			</ol>
+		</div>
+		<!-- EO: Breadcrumb -->
+    
     	<!-- New rule created -->
     	<div th:if="${newrule}" class="row bottom-margin">
     		<div class="col-md-8 col-md-offset-2">
@@ -56,7 +65,8 @@
     					To customize the behavior of your container you may want to create some
     					rules. The first rule that matches will be executed and the custom response 
     					will be returned. If no rule matches the container will answer with status code 200.
-    					Rule creation is easy. 
+    					Rule creation is easy. Giving a meaningful name may help you to organize your 
+    					containers more efficiently. 
     				</p>
     			</div>
     		</div>
@@ -167,13 +177,14 @@
       			</div>
       			<!-- Rename form start -->
    				<form id="rename-form" th:action="@{/container-rename}" method="POST">
-	      			<div class="modal-body">
+	      			<div th:object="${container}" class="modal-body">
     					<label for="ctnr_name">New name</label>
-    					<input type="text" class="form-control" id="ctnr_name" placeholder="New name" th:value="${container.name}">
+    					<input name="newName" type="text" class="form-control" id="ctnr_name" placeholder="New name" th:value="*{name}">
+    					<input name="containerId" type="hidden" th:value="*{id}"/>
       				</div>
       				<div class="modal-footer">
         				<button type="button" class="btn btn-success" data-dismiss="modal">Cancel</button>
-        				<button type="button" id="save-cntr-name" class="btn btn-success">OK</button>
+        				<button type="submit" id="save-cntr-name" class="btn btn-success">OK</button>
       				</div>
       			</form>
     		</div>
