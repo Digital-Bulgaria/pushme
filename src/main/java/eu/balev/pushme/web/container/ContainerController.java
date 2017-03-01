@@ -1,5 +1,7 @@
 package eu.balev.pushme.web.container;
 
+import java.util.Optional;
+
 import javax.servlet.http.HttpServletRequest;
 
 import org.slf4j.Logger;
@@ -22,6 +24,7 @@ import eu.balev.pushme.domain.Rule;
 import eu.balev.pushme.repository.ContainerRepository;
 import eu.balev.pushme.service.container.ContainerService;
 import eu.balev.pushme.service.request.RequestService;
+import eu.balev.pushme.web.error.ObjectNotFoundException;
 
 @Controller
 public class ContainerController {
@@ -38,6 +41,13 @@ public class ContainerController {
 	@Autowired
 	private ContainerRepository containerRepo;
 
+	/**
+	 * Handles a push request for the controller.
+	 * 
+	 * @param id
+	 * @param httpRequest
+	 * @return
+	 */
 	@RequestMapping(value = "/container/{id}")
 	public ResponseEntity<String> pushInContainer(
 			@PathVariable("id") String id, HttpServletRequest httpRequest) {
@@ -58,12 +68,25 @@ public class ContainerController {
 		return response;
 	}
 
+	/**
+	 * Inspects a the contents of a container.
+	 * 
+	 * @param id
+	 * @return
+	 */
 	@RequestMapping(value = "/container-inspect", method = RequestMethod.GET)
 	public ModelAndView inspectContainer(@RequestParam(value = "id") String id) {
 
 		return processContainer("inspectcontainer", id);
 	}
 
+	/**
+	 * Sets up a container
+	 * 
+	 * @param id
+	 * @param newrule
+	 * @return
+	 */
 	@RequestMapping(value = "/container-setup", method = RequestMethod.GET)
 	public ModelAndView setupContainer(@RequestParam(value = "id") String id,
 			@RequestParam(value = "newrule", required = false) String newrule) {
@@ -80,7 +103,7 @@ public class ContainerController {
 	@PostMapping(value = "/container-rename")
 	public String renameContainer(
 			@RequestParam("containerId") String containerId,
-			@RequestParam(name="newName", required=false) String newName,
+			@RequestParam(name = "newName", required = false) String newName,
 			RedirectAttributes redirectAttributes) {
 
 		LOGGER.debug("Received rename request for container with id {}.",
@@ -88,7 +111,7 @@ public class ContainerController {
 
 		Container ctnr = containerRepo.findOne(containerId);
 		if (ctnr == null) {
-			LOGGER.debug("Unable to find container by id {}.", containerId);
+			throw new ObjectNotFoundException();
 		} else if (newName == null || newName.isEmpty()) {
 			LOGGER.debug(
 					"Rename for container with id {} was requested but no new name was provided.",
@@ -104,17 +127,16 @@ public class ContainerController {
 	}
 
 	private ModelAndView processContainer(String viewName, String ctnrID) {
+
 		ModelAndView result = new ModelAndView();
 
-		Container container = containerRepo.findOne(ctnrID);
-
-		if (container == null) {
-			result.setStatus(HttpStatus.NOT_FOUND);
-			result.setViewName("containernotfound");
-		} else {
-			result.setViewName(viewName);
-			result.addObject("container", container);
-		}
+		Container container = Optional
+				.ofNullable(containerRepo.findOne(ctnrID)).orElseThrow(
+						() -> new ObjectNotFoundException());
+		
+		result.setViewName(viewName);
+		result.addObject("container", container);
+		
 		return result;
 	}
 }

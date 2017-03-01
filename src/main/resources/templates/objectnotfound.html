@@ -1,0 +1,46 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="/fragments/commonheader :: common_header(~{::title},~{})">
+	
+    <title>PushMe - object not found</title>
+		
+</head>
+
+<body>  
+    
+    <nav 
+		th:replace="/fragments/commonnavbar :: common_navbar(~{})" 
+		class="navbar navbar-default">
+	</nav>
+    
+    <div class="container-fluid">
+    
+    	<!-- Title row -->
+    	<div class="row bottom-margin">
+    		<div class="col-md-8 col-md-offset-2">
+    			<h1 class="text-center">
+    				Ooops! A problem!
+    			</h1>
+    		</div>
+    	</div>
+    	
+    	<!-- container 404 msg -->
+    	<div class="row bottom-margin">
+    		<div class="col-md-8 col-md-offset-2">
+    			<div class="alert alert-danger" role="alert">
+    				<p class="text-center">
+    					The object that you are looking for no longer exists! 
+    					There might be several reasons for that. The object might have been manually or automatically deleted 
+    					(especially objects belonging to anonymous users are ephemeral).
+    					The link might be broken or old. This <em>even</em> might be a bug! 
+    					<i class="fa fa-smile-o" aria-hidden="true"></i>
+    				</p>
+    			</div>
+    		</div>
+    	</div>
+    	
+    	
+    </div>	
+</body>
+</html>
