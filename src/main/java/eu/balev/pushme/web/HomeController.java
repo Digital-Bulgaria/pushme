@@ -27,12 +27,12 @@ public class HomeController {
 	private ContainerRepository containerRepo;
 
 	@RequestMapping("/")
-	public String root(@AuthenticationPrincipal CurrentUser currentUser) {
+	public String root() {
 		return "index";
 	}
 
 	@RequestMapping("/home")
-	public String home(@AuthenticationPrincipal CurrentUser currentUser) {
+	public String home() {
 		return "index";
 	}
 	
@@ -44,7 +44,8 @@ public class HomeController {
 	}
 	
 	@ModelAttribute
-	private void fillCtnrStatus(@AuthenticationPrincipal CurrentUser currentUser, 
+	private void fillCtnrStatus(
+			@AuthenticationPrincipal CurrentUser currentUser, 
 			ModelMap modelMap) {
 		// count the number of containers
 		if (currentUser != null) {
@@ -52,8 +53,11 @@ public class HomeController {
 			Long containerCnt = containerRepo.countByUser(user);
 			Boolean maxReached = containerCnt >= maxContainers;
 			LOGGER.debug(
-					"User {} has {} containers. Maximum reached = {}. Serving the condition to the home page.",
-					user.getId(), containerCnt, maxReached);
+					"User {} has {} containers. Maximum possible are {}. Maximum reached = {}. Serving the condition to the home page.",
+					user.getId(), 
+					containerCnt, 
+					maxContainers,
+					maxReached);
 
 			modelMap.addAttribute("maxReached", maxReached);
 			modelMap.addAttribute("ctnrCnt", containerCnt);
