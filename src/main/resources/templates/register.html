@@ -1,7 +1,7 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
 
-<head th:replace="/fragments/commonheader :: common_header(~{::title},~{::script})">
+<head th:replace="fragments/commonheader :: common_header(~{::title},~{::script})">
 	
     <title>PushMe - register a new user</title>
     
@@ -12,7 +12,7 @@
 <body>
 
 	<nav 
-		th:replace="/fragments/commonnavbar :: common_navbar('register')" 
+		th:replace="fragments/commonnavbar :: common_navbar('register')" 
 		class="navbar navbar-default">
 	</nav>
 

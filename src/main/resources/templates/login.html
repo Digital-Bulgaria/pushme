@@ -1,7 +1,7 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
 
-<head th:replace="/fragments/commonheader :: common_header(~{::title},~{})">
+<head th:replace="fragments/commonheader :: common_header(~{::title},~{})">
 	
     <title>PushMe - collect and explore HTTP requests</title>
 	
@@ -9,7 +9,7 @@
 
 <body>
 
-	<nav th:replace="/fragments/commonnavbar :: common_navbar('login')" ></nav>
+	<nav th:replace="fragments/commonnavbar :: common_navbar('login')" ></nav>
 
 	<div class="container">    
     

@@ -1,7 +1,7 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
 
-<head th:replace="/fragments/commonheader :: common_header(~{::title},~{})">
+<head th:replace="fragments/commonheader :: common_header(~{::title},~{})">
 	
     <title>PushMe - object not found</title>
 		
@@ -10,7 +10,7 @@
 <body>  
     
     <nav 
-		th:replace="/fragments/commonnavbar :: common_navbar(~{})" 
+		th:replace="fragments/commonnavbar :: common_navbar(~{})" 
 		class="navbar navbar-default">
 	</nav>
     

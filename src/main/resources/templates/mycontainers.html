@@ -1,6 +1,6 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
-<head th:replace="/fragments/commonheader :: common_header(~{::title},~{::script})">
+<head th:replace="fragments/commonheader :: common_header(~{::title},~{::script})">
 
 	<title>PushMe - my containers</title>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
@@ -15,7 +15,7 @@
 <body>
 
 	<nav 
-		th:replace="/fragments/commonnavbar :: common_navbar('mycontainers')" 
+		th:replace="fragments/commonnavbar :: common_navbar('mycontainers')" 
 		class="navbar navbar-default">
 	</nav>
 

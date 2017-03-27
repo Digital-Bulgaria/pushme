@@ -3,7 +3,7 @@
 	xmlns:th="http://www.thymeleaf.org"
 	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
 
-<head th:replace="/fragments/commonheader :: common_header(~{::title},~{::script})">
+<head th:replace="fragments/commonheader :: common_header(~{::title},~{::script})">
 	
     <title>PushMe - collect and explore HTTP requests</title>
 		
@@ -16,7 +16,7 @@
 
 <body>
 
-	<nav th:replace="/fragments/commonnavbar :: common_navbar('home')" ></nav>
+	<nav th:replace="fragments/commonnavbar :: common_navbar('home')" ></nav>
 
     <div class="container-fluid">
     
