@@ -3,6 +3,7 @@ package eu.balev.pushme.domain;
 import javax.persistence.*;
 
 @Entity
+@Table(name = "USERS")//USER is reserved in some DB-s, e.g. Postgresql
 public class User {
 
     @Id
