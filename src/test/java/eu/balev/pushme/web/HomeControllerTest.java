@@ -1,10 +1,10 @@
 package eu.balev.pushme.web;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mockito;
@@ -19,6 +19,7 @@ import org.springframework.test.web.servlet.MockMvc;
 import eu.balev.pushme.repository.ContainerRepository;
 import eu.balev.pushme.web.security.WithMockCustomUser;
 
+@Ignore
 @RunWith(SpringRunner.class)
 @SpringBootTest
 @AutoConfigureMockMvc
